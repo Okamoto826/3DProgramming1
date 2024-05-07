@@ -1,9 +1,14 @@
 ﻿#pragma once
 
-//class Player;
+class Player;
 //class Enemy;
 class BaseObject;
-
+struct Back
+{
+	Math::Vector3	m_pos;
+	KdTexture		m_tex;
+	Math::Matrix	m_mat;
+};
 class GameScene
 {
 public:
@@ -19,7 +24,7 @@ public:
 
 	// オブジェクトリストを取得
 	std::vector<std::shared_ptr<BaseObject>> GetObjList() { return m_objList; }
-
+	std::shared_ptr<Player> GetPlayer() { return m_player; }
 	// オブジェクトリストにオブジェクト追加
 	void AddObject(std::shared_ptr<BaseObject> _obj) { m_objList.push_back(_obj); }
 
@@ -30,7 +35,7 @@ private:
 	//Player* m_player = nullptr;	// 派生クラスのポインタ
 
 	//BaseObject* m_player = nullptr;	// 基底クラスのポインタ
-	//std::shared_ptr<Player> m_player = nullptr;	// スマートポインタ
+	std::shared_ptr<Player> m_player = nullptr;	// スマートポインタ
 	//std::shared_ptr<BaseObject> m_player = nullptr;	// スマートポインタ(ポリモーフィズム適用版)
 	
 	// 04/22
@@ -39,6 +44,10 @@ private:
 	// 全オブジェクトのリストを可変長配列で管理
 	// BaseObject型のshared_ptrを持った可変長配列vectorを宣言
 	std::vector<std::shared_ptr<BaseObject>> m_objList;
+
+	int Timer;
+
+	Back m_back[2];
 
 	
 };

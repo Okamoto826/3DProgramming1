@@ -37,6 +37,7 @@ private:
 	KdTexture m_skillTex;
 	KdTexture m_downTex;
 	GameScene* m_pOwner = nullptr;
+	float m_MiniX;
 	int m_drawCount;
 	int m_moveCount;
 	Math::Vector3 m_movePow;

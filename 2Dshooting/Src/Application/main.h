@@ -2,6 +2,7 @@
 
 // 前方宣言
 class GameScene;
+class TitleScene;
 
 //============================================================
 // アプリケーションクラス
@@ -11,6 +12,14 @@ class Application
 {
 // メンバ
 public:
+	enum NowScene
+	{
+		Title,
+		Game,
+		Result,
+		DethResult,
+	};
+
 
 	// アプリケーション実行
 	void Execute();
@@ -54,7 +63,10 @@ private:
 	// ゲーム終了フラグ trueで終了する
 	bool		m_endFlag = false;
 
+	TitleScene* m_titleScene;
 	GameScene*	m_nowScene;	// 現在のシーンのインスタンス
+	NowScene nowScene;
+	bool m_keyFlg;
 
 //=====================================================
 // シングルトンパターン

@@ -1,5 +1,6 @@
 ﻿#include "main.h"
 #include "Scene/GameScene.h"	// 相対パス
+#include "Scene/Title.h"
 
 // ///// ///// ///// ///// ///// ///// ///// ///// ///// ///// ///// ///// ///// ///// /////
 // エントリーポイント
@@ -58,7 +59,8 @@ void Application::KdPostUpdate()
 // ///// ///// ///// ///// ///// ///// ///// ///// ///// ///// ///// ///// ///// ///// /////
 void Application::PreUpdate()
 {
-	m_nowScene->PreUpdate();
+	if (nowScene == NowScene::Title)m_titleScene->PreUpdate();
+	if (nowScene == NowScene::Game)m_nowScene->PreUpdate();
 }
 
 // ///// ///// ///// ///// ///// ///// ///// ///// ///// ///// ///// ///// ///// ///// /////
@@ -66,7 +68,28 @@ void Application::PreUpdate()
 // ///// ///// ///// ///// ///// ///// ///// ///// ///// ///// ///// ///// ///// ///// /////
 void Application::Update()
 {
-	m_nowScene->Update();
+	if (nowScene == NowScene::Title)m_titleScene->Update();
+	if (nowScene == NowScene::Game)m_nowScene->Update();
+	if (GetAsyncKeyState(VK_RETURN) & 0x8000)
+	{
+		if (m_keyFlg == false)
+		{
+			if (nowScene == NowScene::Title)
+			{
+				m_nowScene = new GameScene();
+				m_nowScene->Init();
+				nowScene = NowScene::Game;
+			
+			}
+			else if (nowScene == NowScene::Game)
+			{
+				m_titleScene->Init();
+				nowScene = NowScene::Title;	
+			}
+		}
+		m_keyFlg = true;
+	}
+	else { m_keyFlg = false; }
 }
 
 // ///// ///// ///// ///// ///// ///// ///// ///// ///// ///// ///// ///// ///// ///// /////
@@ -160,7 +183,9 @@ void Application::DrawSprite()
 	// 2Dの描画はこの間で行う
 	KdShaderManager::Instance().m_spriteShader.Begin();
 	{
-		m_nowScene->Draw();
+		if (nowScene == NowScene::Title)m_titleScene->Draw();
+		if(nowScene==NowScene::Game)m_nowScene->Draw();
+		
 	}
 	KdShaderManager::Instance().m_spriteShader.End();
 }
@@ -173,7 +198,7 @@ bool Application::Init(int w, int h)
 	//===================================================================
 	// ウィンドウ作成
 	//===================================================================
-	if (m_window.Create(w, h, "Yamamoto 2D STG", "Window") == false) {
+	if (m_window.Create(w, h, "Wyvern", "Window") == false) {
 		MessageBoxA(nullptr, "ウィンドウ作成に失敗", "エラー", MB_OK);
 		return false;
 	}
@@ -226,9 +251,12 @@ bool Application::Init(int w, int h)
 	KdAudioManager::Instance().Init();
 
 	// 初期シーン作成 & 初期化
-	m_nowScene = new GameScene();
-	m_nowScene->Init();
+	m_titleScene = new TitleScene();
+	m_titleScene->Init();
+	
 
+	nowScene = NowScene::Title;
+	m_keyFlg = false;
 	return true;
 }
 
@@ -330,6 +358,8 @@ void Application::Execute()
 		//=========================================
 
 		m_fpsController.Update();
+		std::string titlebar = "Wyvern | FPS[" + std::to_string(GetNowFPS()) + "]";
+		SetWindowTextA(m_window.GetWndHandle(), titlebar.c_str());
 	}
 
 	//===================================================================

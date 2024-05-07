@@ -19,6 +19,7 @@ public:
 	void Draw() override;
 	void Init(Math::Vector3 _pos);
 
+	void SetMovePow(Math::Vector3 _movePow) { m_movePow = _movePow; }
 	void SetOwner(GameScene* _pOwner) { m_pOwner = _pOwner; }
 	void SetScale(float _scale) { m_scale = _scale+0.5f; }
 

@@ -2,6 +2,7 @@
 #include "../Object/Player/Player.h"
 #include "../Object/Enemy/Enemy.h"
 #include "../Object/Bullet/Bullet.h"
+#include "../Object/Bullet/EnemyBullet.h"
 
 void GameScene::PreUpdate()
 {
@@ -41,42 +42,94 @@ void GameScene::Update()
 	//m_enemy->Test();
 	//m_enemy->Update();
 	//if (rand() % 100 == 3)
-	////if (rand() % 2 == 0)
-	//{
-	//	std::shared_ptr<Enemy> enemy;
-	//	enemy = std::make_shared<Enemy>();
-	//	enemy->Init();
-	//	//enemy->SetPos(rand() % (1280-32) - (640+32), rand() % (720-32) - (360+32));
-	//	enemy->SetPos(640-32, 360-32);
-	//	enemy->SetMovePow(-2.0f, -2.0f);
-	//	//enemy->SetMovePow({ 0.0f, -1.0f, 0.0f });
-	//	enemy->SetOwner(this);
-	//	m_objList.push_back(enemy);
-	//}
+	//if (rand() % 2 == 0)
+	if (Timer > 2100)
+	{
+		if (rand() % 100 < 3)
+		{
+			std::shared_ptr<Enemy> enemy;
+			enemy = std::make_shared<Enemy>();
+			enemy->Init();
+			enemy->SetPos(float(720 + 20 * rand() % 20), float(rand() % 600 - 300));
+			enemy->SetOwner(this);
+			m_objList.push_back(enemy);
+		}
+	}
+	if (Timer > 1800)
+	{
+		if (rand() % 100 < 2)
+		{
+			std::shared_ptr<Enemy> enemy;
+			enemy = std::make_shared<Enemy>();
+			enemy->Init();
+			enemy->SetPos(float(720 + 20 * rand() % 20), float(rand() % 600 - 300));
+			enemy->SetOwner(this);
+			m_objList.push_back(enemy);
+		}
+	}
 
+	else if(Timer>900)
+	{
+		if (rand() % 100 < 1)
+		{
+			std::shared_ptr<Enemy> enemy;
+			enemy = std::make_shared<Enemy>();
+			enemy->Init();
+			enemy->SetPos(float(720 + 20 * rand() % 20), float(rand() % 600 - 300));
+			enemy->SetOwner(this);
+			m_objList.push_back(enemy);
+		}
+	}
+	
+	
+	else 
+	{
+		if (rand() % 200 < 1)
+		{
+			std::shared_ptr<Enemy> enemy;
+			enemy = std::make_shared<Enemy>();
+			enemy->Init();
+			enemy->SetPos(float(720 + 20 * rand() % 20), float(rand() % 600 - 300));
+			enemy->SetOwner(this);
+			m_objList.push_back(enemy);
+		}
+	}
+
+	m_player->Update();
+	
 	// 全オブジェクトの更新関数を一括で呼ぶ
 	for (int i = 0; i < m_objList.size(); i++)
 	{
 		m_objList[i]->Update();
 	}
+	
+	Timer++;
+
+	for (int i = 0; i < 2; i++)
+	{
+		m_back[i].m_pos.x -= 4;
+		if(m_back[i].m_pos.x < -1276)m_back[i].m_pos.x = 1280;
+		m_back[i].m_mat = Math::Matrix::CreateTranslation(m_back[i].m_pos);
+	}
 }
 
 void GameScene::Draw()
 {
-	//m_player->Draw();
-
-	//m_enemy->Draw();
-
-	// 全オブジェクトの更新関数を一括で呼ぶ
-	// 範囲ベースfor
-	/*for (auto& obj : m_objList)
+	for (int i = 0; i < 2; i++)
 	{
-		obj->Draw();
-	}*/
+		Math::Rectangle rc;
+		KdShaderManager::Instance().m_spriteShader.SetMatrix(m_back[i].m_mat);
+
+		rc = { 0, 0, 1280, 720 };
+		
+		KdShaderManager::Instance().m_spriteShader.DrawTex(&m_back[i].m_tex, 0, 0, 1280, 720, &rc);
+		
+	}
 	for (int i = 0; i < m_objList.size(); i++)
 	{
 		m_objList[i]->Draw();
 	}
+	m_player->Draw();
 }
 
 void GameScene::Init()
@@ -93,23 +146,31 @@ void GameScene::Init()
 
 	// ローカル変数として作成してからpush_back！！
 	// == プレイヤー ============
-	std::shared_ptr<Player> player;
-	player = std::make_shared<Player>();
-	player->Init();
-	player->SetOwner(this);
-	m_objList.push_back(player);
+	
+	m_player = std::make_shared<Player>();
+	m_player->Init();
+	m_player->SetOwner(this);
+	
 
 	// == エネミー ============
+	std::shared_ptr<Enemy> enemy;
 	for (int i = 0; i < 10; i++)
 	{
-		std::shared_ptr<Enemy> enemy;
+		
 		enemy = std::make_shared<Enemy>();
 		enemy->Init();
-		enemy->SetPos(1000 + i*200.0f, 0.0f);
-		//enemy->SetMovePow({ 0.0f, -1.0f, 0.0f });
+		enemy->SetPos(1000 + i*200.0f, float(rand() % 600 - 300));
 		enemy->SetOwner(this);
 		m_objList.push_back(enemy);
 	}
+	for (int i = 0; i < 2; i++)
+	{
+		m_back[i].m_tex.Load("Asset/Textures/Back.png");
+		m_back[i].m_pos = { float(0 + 1280 * i), 0, 0 };
+	}
+
+	Timer = 0;
+	srand(timeGetTime());
 }
 
 void GameScene::Release()

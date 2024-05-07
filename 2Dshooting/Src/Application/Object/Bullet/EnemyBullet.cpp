@@ -1,5 +1,6 @@
 ﻿#include "../../Scene/GameScene.h"
 #include "EnemyBullet.h"
+#include"../Player/Player.h"
 
 void EnemyBullet::Update()
 {
@@ -7,24 +8,22 @@ void EnemyBullet::Update()
 
 	if (m_pos.x < -700.0f) m_bAlive = false;
 
-	for (auto& obj : m_pOwner->GetObjList())
-	{
-		if (obj->GetObjType() == ObjectType::Player)
-		{
+	std::shared_ptr<Player> player = m_pOwner->GetPlayer();
+	
 			// 対象座標 - 自分座標 = 対象へのベクトル
 			Math::Vector3 v;
-			v = obj->GetPos() - m_pos;
+			v = { player->GetPos().x - m_pos.x, player->GetPos().y - 85 * player->GetScale() - m_pos.y, player->GetPos().z - m_pos.z };
 
 			// 球判定　・・・　ベクトルの長さで判定する
-			if (v.Length() < 40.0f + 16 * obj->GetScale())
+			if (v.Length() < 8 + 140 * player->GetScale())
 			{
-				obj->OnHit();
+				player->OnHit();
 				OnHit();
 			}
 
-			break;
-		}
-	}
+			
+		
+	
 
 	m_mat = Math::Matrix::CreateTranslation(m_pos.x, m_pos.y, 0.0f);
 }

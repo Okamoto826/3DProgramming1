@@ -1,5 +1,6 @@
 ﻿#include "../../Scene/GameScene.h"
 #include "Player.h"
+#include"../Enemy/Enemy.h"
 #include "../../Object/Bullet/Bullet.h"
 
 void Player::Update()
@@ -32,35 +33,25 @@ void Player::Update()
 			bullet->SetOwner(m_pOwner);
 			bullet->SetScale(m_scale*2);
 			m_pOwner->AddObject(bullet);
+			if (m_scale > 1.0)
+			{
+				for (int i = 0; i < 2; i++)
+				{
+					std::shared_ptr<Bullet> bullet;
+					bullet = std::make_shared<Bullet>();
+					Math::Vector3 setPos = { float(m_pos.x + 150 * m_scale),float(m_pos.y - 85 * m_scale), m_pos.z };
+					bullet->Init(setPos);
+					bullet->SetOwner(m_pOwner);
+					bullet->SetScale(m_scale * 2);
+					bullet->SetMovePow({ 5.0,float(3.0 - 6.0 * i),0 });
+					m_pOwner->AddObject(bullet);
+				}
+			}
 		}
 		
 	}
 	
-	// 当たり判定は移動の後、行列作成の前にする！！
-	// プレイヤーと敵の当たり判定　・・・　敵の情報が必要
-	// オブジェクトリストをすべて見ていく
-	for (auto& obj : m_pOwner->GetObjList())
-	{
-		//if (obj->GetObjType() == ObjectType::Bullet) continue;
-		//if (obj->GetObjType() == ObjectType::Enemy) continue;
 
-		if (obj->GetObjType() == ObjectType::Enemy)
-		{	
-			// 当たり判定を行う		
-			
-			// 対象座標 - 自分座標 = 対象へのベクトル
-			Math::Vector3 v;
-			v = obj->GetPos() - m_pos;
-			
-			// 球判定　・・・　ベクトルの長さで判定する
-			if (v.Length() < 64.0f)
-			{
-				obj->OnHit();
-			}
-			
-			break;
-		}
-	}
 	m_drawCount++;
 	if (m_drawCount > 47)
 	{
@@ -70,7 +61,7 @@ void Player::Update()
 		}
 		m_drawCount = 0;
 	}
-
+	m_lifeGurd--;
 
 	Math::Matrix transMat;
 	transMat = Math::Matrix::CreateTranslation(m_pos);
@@ -100,6 +91,7 @@ void Player::Init()
 	m_drawCount = 0;
 	m_nowMode = NowMode::idle;
 	m_scale = 0.5;
+	m_breakCount = 0;
 
 	m_tex.Load("Asset/Textures/Wyvern/WyvernMove.png");
 	m_skillTex.Load("Asset/Textures/Wyvern/WyvernSkill.png");
@@ -109,8 +101,75 @@ void Player::Init()
 	m_bAlive = true;					// 
 	m_mat = Math::Matrix::Identity;		// 単位行列で初期化
 
-	m_objType = ObjectType::Player;		// 種類は「プレイヤー」
+	// 種類は「プレイヤー」
 	// 単位行列　・・・　拡大率全て 1.0　他の値は全て 0
+}
+
+void Player::BreakEnemy()
+{
+	m_breakCount++;
+	switch (int(m_scale * 10))
+	{
+	case 1:
+	case 2:
+	case 3:
+	case 4:
+	case 5:
+		if (m_breakCount > 2)
+		{
+			m_scale += 0.1;
+			m_breakCount = 0;
+		}
+		break;
+	case 6:
+	case 7:
+	case 8:
+		if (m_breakCount > 5)
+		{
+			m_scale += 0.1;
+			m_breakCount = 0;
+		}
+		break;
+	case 9:
+		if (m_breakCount > 12)
+		{
+			m_scale += 0.1;
+			m_breakCount = 0;
+		
+		}
+		break;
+	case 10:
+		if (m_breakCount > 15)
+		{
+			m_scale += 0.1;
+			m_breakCount = 0;
+		}
+		break;
+	case 11:
+		if (m_breakCount > 30)
+		{
+			m_scale += 0.1;
+			m_breakCount = 0;
+		}
+		break;
+	case 12:
+		if (m_breakCount > 30)
+		{
+			m_scale += 0.1;
+			m_breakCount = 0;
+		}
+		break;
+	}
+	if (m_scale > 1.2)m_scale = 1.2;
+}
+
+void Player::OnHit()
+{
+	if (m_lifeGurd < 0)
+	{
+		m_scale -= 0.1;
+		m_lifeGurd = 30;
+	}
 }
 
 void Player::Release()

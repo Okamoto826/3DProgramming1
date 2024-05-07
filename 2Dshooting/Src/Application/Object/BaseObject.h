@@ -10,7 +10,6 @@ public:
 	// オブジェクトの種類
 	enum class ObjectType
 	{
-		Player,
 		Enemy,
 		Bullet,
 		EnemyBullet
