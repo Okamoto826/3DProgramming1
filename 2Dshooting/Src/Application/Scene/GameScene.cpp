@@ -45,7 +45,7 @@ void GameScene::Update()
 	//if (rand() % 2 == 0)
 	if (Timer > 2100)
 	{
-		if (rand() % 100 < 3)
+		if (rand() % 100 < 2)
 		{
 			std::shared_ptr<Enemy> enemy;
 			enemy = std::make_shared<Enemy>();
@@ -57,7 +57,7 @@ void GameScene::Update()
 	}
 	if (Timer > 1800)
 	{
-		if (rand() % 100 < 2)
+		if (rand() % 100 < 1)
 		{
 			std::shared_ptr<Enemy> enemy;
 			enemy = std::make_shared<Enemy>();
@@ -70,7 +70,7 @@ void GameScene::Update()
 
 	else if(Timer>900)
 	{
-		if (rand() % 100 < 1)
+		if (rand() % 150 < 1)
 		{
 			std::shared_ptr<Enemy> enemy;
 			enemy = std::make_shared<Enemy>();
@@ -96,13 +96,21 @@ void GameScene::Update()
 	}
 
 	m_player->Update();
+	if (GetAsyncKeyState('T'))clearFlg = true;
 	
-	// 全オブジェクトの更新関数を一括で呼ぶ
-	for (int i = 0; i < m_objList.size(); i++)
+	if (clearFlg == false&&DeathFlg==false)
 	{
-		m_objList[i]->Update();
+		// 全オブジェクトの更新関数を一括で呼ぶ
+		for (int i = 0; i < m_objList.size(); i++)
+		{
+			m_objList[i]->Update();
+		}
+
 	}
-	
+	if (clearFlg == true||DeathFlg==true)
+	{
+		m_mat = Math::Matrix::CreateTranslation(m_pos);
+	}
 	Timer++;
 
 	for (int i = 0; i < 2; i++)
@@ -125,11 +133,32 @@ void GameScene::Draw()
 		KdShaderManager::Instance().m_spriteShader.DrawTex(&m_back[i].m_tex, 0, 0, 1280, 720, &rc);
 		
 	}
-	for (int i = 0; i < m_objList.size(); i++)
+	if(clearFlg==false&&DeathFlg==false)
 	{
-		m_objList[i]->Draw();
+		for (int i = 0; i < m_objList.size(); i++)
+		{
+			m_objList[i]->Draw();
+		}
 	}
 	m_player->Draw();
+	if (clearFlg == true) 
+	{
+		Math::Rectangle rc;
+		KdShaderManager::Instance().m_spriteShader.SetMatrix(m_mat);
+
+		rc = { 0, 0, 875, 122 };
+
+		KdShaderManager::Instance().m_spriteShader.DrawTex(&m_tex, 0, 0, 875, 122, &rc);
+	}
+	if (DeathFlg == true)
+	{
+		Math::Rectangle rc;
+		KdShaderManager::Instance().m_spriteShader.SetMatrix(m_mat);
+
+		rc = { 0, 0, 754, 145 };
+
+		KdShaderManager::Instance().m_spriteShader.DrawTex(&m_tex, 0, 0, 754, 145, &rc);
+	}
 }
 
 void GameScene::Init()
@@ -168,6 +197,12 @@ void GameScene::Init()
 		m_back[i].m_tex.Load("Asset/Textures/Back.png");
 		m_back[i].m_pos = { float(0 + 1280 * i), 0, 0 };
 	}
+	m_tex.Load("Asset/Textures/clear.png");
+	m_pos = { 0,0,0 };
+	m_Dtex.Load("Asset/Textures/Death.png");
+	m_Dpos = { 0,0,0 };
+	clearFlg = false;
+	DeathFlg = false;
 
 	Timer = 0;
 	srand(timeGetTime());

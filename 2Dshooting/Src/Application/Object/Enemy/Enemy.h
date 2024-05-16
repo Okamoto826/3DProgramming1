@@ -40,6 +40,7 @@ private:
 	float m_MiniX;
 	int m_drawCount;
 	int m_moveCount;
+	int m_coolTime;
 	Math::Vector3 m_movePow;
 
 	void Release() override;

@@ -1,6 +1,7 @@
 ﻿#include "Enemy.h"
 #include"../Player/Player.h"
 #include "../../Scene/GameScene.h"
+#include "../../Object/Bullet/EnemyBullet.h"
 
 void Enemy::Update()
 {
@@ -16,7 +17,20 @@ void Enemy::Update()
 		{
 			m_drawCount = 0;
 		}
+		std::shared_ptr<Player> player = m_pOwner->GetPlayer();
 
+		// 対象座標 - 自分座標 = 対象へのベクトル
+		Math::Vector3 v;
+		v = { player->GetPos().x - m_pos.x, player->GetPos().y - 85 * player->GetScale() - m_pos.y, player->GetPos().z - m_pos.z };
+
+		// 球判定　・・・　ベクトルの長さで判定する
+		if (v.Length() <800&&m_pos.x<650)
+		{
+			if(m_coolTime>=120)
+			{
+				m_nowMode = NowMode::skill;
+			}
+		}
 	}
 	
 	if (m_nowMode == NowMode::down)
@@ -32,14 +46,29 @@ void Enemy::Update()
 
 	if (m_nowMode == NowMode::skill)
 	{
+		if (m_drawCount == 24)
+		{
+			std::shared_ptr<Player> player = m_pOwner->GetPlayer();
+
+			std::shared_ptr<EnemyBullet> Enemybullet;
+			Enemybullet = std::make_shared<EnemyBullet>();
+			Math::Vector3 setPos = { float(m_pos.x),float(m_pos.y - 20), m_pos.z };
+			Enemybullet->Init(setPos);
+			float angle = atan2(player->GetPos().y - m_pos.y - 20, player->GetPos().x - m_pos.x);
+			Enemybullet->SetMovePow({ cos(angle)*4,sin(angle)*4,0});
+			Enemybullet->SetOwner(m_pOwner);
+			m_pOwner->AddObject(Enemybullet);
+		}
 		if (m_drawCount > 47)
 		{
+			m_coolTime = 0;
 			m_nowMode = NowMode::idle;
+			
 		}
 	}
 	
 	
-	
+	m_coolTime++;
 
 		
 	Math::Matrix transMat;
@@ -81,6 +110,7 @@ void Enemy::Init()
 	m_bAlive = true;
 	m_nowMode = NowMode::idle;
 	m_MiniX = rand() % 100 + 180;
+	m_coolTime = 0;
 }
 
 void Enemy::OnHit()

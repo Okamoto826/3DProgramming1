@@ -12,10 +12,10 @@ void EnemyBullet::Update()
 	
 			// 対象座標 - 自分座標 = 対象へのベクトル
 			Math::Vector3 v;
-			v = { player->GetPos().x - m_pos.x, player->GetPos().y - 85 * player->GetScale() - m_pos.y, player->GetPos().z - m_pos.z };
+			v = { player->GetPos().x - m_pos.x, player->GetPos().y - 60 * player->GetScale() - m_pos.y, player->GetPos().z - m_pos.z };
 
 			// 球判定　・・・　ベクトルの長さで判定する
-			if (v.Length() < 8 + 140 * player->GetScale())
+			if (v.Length() < 8 + 100 * player->GetScale())
 			{
 				player->OnHit();
 				OnHit();
