@@ -52,6 +52,9 @@ private:
 	bool		m_endFlag = false;
 
 	std::shared_ptr<KdCamera>			m_spCamera		= nullptr;
+	std::shared_ptr<KdGameObject> sun = nullptr;
+	std::shared_ptr<KdGameObject> earth = nullptr;
+	std::shared_ptr<KdGameObject> moon = nullptr;
 
 //=====================================================
 // シングルトンパターン

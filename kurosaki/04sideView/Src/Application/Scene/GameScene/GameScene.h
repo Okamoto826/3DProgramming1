@@ -1,6 +1,7 @@
 ﻿#pragma once
 
 #include"../BaseScene/BaseScene.h"
+class Player;
 
 class GameScene : public BaseScene
 {
@@ -13,4 +14,6 @@ private:
 
 	void Event() override;
 	void Init() override;
+
+	std::weak_ptr<Player> m_player;
 };

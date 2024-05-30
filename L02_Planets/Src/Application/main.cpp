@@ -1,5 +1,8 @@
 ﻿#include "main.h"
 
+#include"Object/Sun/Sun.h"
+#include"Object/Earth/Earth.h"
+#include"Object/Moon/Moon.h"
 // ///// ///// ///// ///// ///// ///// ///// ///// ///// ///// ///// ///// ///// ///// /////
 // エントリーポイント
 // アプリケーションはこの関数から進行する
@@ -64,6 +67,9 @@ void Application::PreUpdate()
 // ///// ///// ///// ///// ///// ///// ///// ///// ///// ///// ///// ///// ///// ///// /////
 void Application::Update()
 {
+	sun->Update();
+	earth->Update();
+	moon->Update();
 }
 
 // ///// ///// ///// ///// ///// ///// ///// ///// ///// ///// ///// ///// ///// ///// /////
@@ -120,6 +126,10 @@ void Application::Draw()
 	// 陰影のあるオブジェクト(不透明な物体や2Dキャラ)はBeginとEndの間にまとめてDrawする
 	KdShaderManager::Instance().m_StandardShader.BeginLit();
 	{
+		
+		sun->DrawLit();
+		earth->DrawLit();
+		moon->DrawLit();
 	}
 	KdShaderManager::Instance().m_StandardShader.EndLit();
 
@@ -179,9 +189,9 @@ bool Application::Init(int w, int h)
 	// フルスクリーン確認
 	//===================================================================
 	bool bFullScreen = false;
-	if (MessageBoxA(m_window.GetWndHandle(), "フルスクリーンにしますか？", "確認", MB_YESNO | MB_ICONQUESTION | MB_DEFBUTTON2) == IDYES) {
+	/*if (MessageBoxA(m_window.GetWndHandle(), "フルスクリーンにしますか？", "確認", MB_YESNO | MB_ICONQUESTION | MB_DEFBUTTON2) == IDYES) {
 		bFullScreen = true;
-	}
+	}*/
 
 	//===================================================================
 	// Direct3D初期化
@@ -227,6 +237,16 @@ bool Application::Init(int w, int h)
 	//===================================================================
 	m_spCamera	= std::make_shared<KdCamera>();
 
+	Math::Matrix transMat;
+	transMat = Math::Matrix::CreateTranslation(0, 0, -10);
+	m_spCamera->SetCameraMatrix(transMat);
+
+	
+	sun = std::make_shared<Sun>();
+	
+	earth = std::make_shared<Earth>();
+
+	moon = std::make_shared<Moon>();
 	return true;
 }
 

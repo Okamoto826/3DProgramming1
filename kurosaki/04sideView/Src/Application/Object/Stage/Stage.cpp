@@ -2,16 +2,24 @@
 
 void Stage::Init()
 {
-	m_model.Load("Asset/Models/SideViewMap/SideViewMap.gltf");
+	m_model = std::make_shared<KdModelData>();
+	m_model->Load("Asset/Models/SideViewMap/SideViewMap.gltf");
 
+	Math::Matrix transMat;
+	transMat = Math::Matrix::CreateTranslation(0, -2, 0);
 	Math::Matrix scaleMat;
 	scaleMat = Math::Matrix::CreateScale(5.0, 1, 1);
 
-	m_mWorld = scaleMat;
+	// 行列の合成は基本的にSRT
+	m_mWorld = scaleMat * transMat;
+
+	// 当たり判定用の初期化
+	m_pCollider = std::make_unique<KdCollider>();
+	m_pCollider->RegisterCollisionShape("StageCollision", m_model, KdCollider::TypeGround);
 }
 
 void Stage::DrawLit()
 {
 	
-	KdShaderManager::Instance().m_StandardShader.DrawModel(m_model,m_mWorld);
+	KdShaderManager::Instance().m_StandardShader.DrawModel(*m_model,m_mWorld);
 }

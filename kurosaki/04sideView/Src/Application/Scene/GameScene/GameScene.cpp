@@ -15,20 +15,22 @@ void GameScene::Event()
 	}
 
 	// カメラ処理
-	static float x = 0;
-	if (GetAsyncKeyState(VK_LEFT) & 0x8000)
+	// ここでプレイヤーの座標が取得できれば勝ち
+	// ①オブジェクトリストからプレイヤー情報を取得
+	// リストからプレイヤーを探す手間がかかる
+	// ②プレイヤー情報は個別で持つ
+	// メモリ食います
+	// 今回は②を使う
+	Math::Vector3 playerPos;
+	if (m_player.expired() == false)
 	{
-		x -= 0.1f;
-	}
-	if (GetAsyncKeyState(VK_RIGHT) & 0x8000)
-	{
-		x += 0.1f;
+		playerPos = m_player.lock()->GetPos();
 	}
 
-	
 
 	Math::Matrix transMat;
-	transMat = Math::Matrix::CreateTranslation(x, 2, -5);
+	Math::Vector3 cameraPos = { 3.0f,1.5f,-5.0f };
+	transMat = Math::Matrix::CreateTranslation(cameraPos + playerPos);
 	m_camera->SetCameraMatrix(transMat);
 }
 
@@ -52,4 +54,5 @@ void GameScene::Init()
 	std::shared_ptr<Player> player;
 	player = std::make_shared<Player>();
 	m_objList.push_back(player);
+	m_player = player;
 }
