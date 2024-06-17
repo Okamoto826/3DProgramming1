@@ -7,6 +7,7 @@ public:
 	~Player() {}
 
 	void Init()override;
+	void GenerateDepthMapFromLight()override;
 	void DrawLit()override;
 
 	void Update()override;

@@ -67,6 +67,27 @@
     <Filter Include="Src\Application\Scene\GameScene">
       <UniqueIdentifier>{15b4a73e-7369-4959-bb49-4b163a24b7b5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Library\imgui">
+      <UniqueIdentifier>{23d2f9d4-1323-4065-9fd2-1ad00748f9d1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Src\Application\Object">
+      <UniqueIdentifier>{1bbd8898-217b-4084-83ec-45383213c7e0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Src\Application\Object\BackGround">
+      <UniqueIdentifier>{4766d0a8-3138-4f5f-bfcc-d9478ded3f07}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Src\Application\Object\Ground">
+      <UniqueIdentifier>{8365a052-d12a-4d0c-a03c-dda12459972d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Src\Application\Object\Player">
+      <UniqueIdentifier>{854fa658-3f0c-4c63-91d3-8f6dd563c2cf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Src\Application\Object\Enemy">
+      <UniqueIdentifier>{2fac56f8-6cde-460c-91e7-8f8170d7c16e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Src\Application\Object\Attack">
+      <UniqueIdentifier>{d7730886-26a7-4fa2-9f71-1fdf9ffb24c7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Pch.h">
@@ -204,6 +225,51 @@
     <ClInclude Include="Src\Application\Scene\TitleScene\TitleScene.h">
       <Filter>Src\Application\Scene\TitleScene</Filter>
     </ClInclude>
+    <ClInclude Include="..\Library\imgui\imconfig.h">
+      <Filter>Library\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Library\imgui\imgui.h">
+      <Filter>Library\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Library\imgui\imgui_impl_dx11.h">
+      <Filter>Library\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Library\imgui\imgui_impl_win32.h">
+      <Filter>Library\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Library\imgui\imgui_internal.h">
+      <Filter>Library\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Library\imgui\imgui_stdlib.h">
+      <Filter>Library\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Library\imgui\imstb_rectpack.h">
+      <Filter>Library\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Library\imgui\imstb_textedit.h">
+      <Filter>Library\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Library\imgui\imstb_truetype.h">
+      <Filter>Library\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Library\imgui\ja_glyph_ranges.h">
+      <Filter>Library\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Application\Object\BackGround\BackGround.h">
+      <Filter>Src\Application\Object\BackGround</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Application\Object\Ground\Ground.h">
+      <Filter>Src\Application\Object\Ground</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Application\Object\Player\Player.h">
+      <Filter>Src\Application\Object\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Application\Object\Enemy\Enemy.h">
+      <Filter>Src\Application\Object\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Application\Object\Attack\Attack.h">
+      <Filter>Src\Application\Object\Attack</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Pch.cpp">
@@ -319,6 +385,45 @@
     </ClCompile>
     <ClCompile Include="Src\Application\Scene\TitleScene\TitleScene.cpp">
       <Filter>Src\Application\Scene\TitleScene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Library\imgui\imgui.cpp">
+      <Filter>Library\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Library\imgui\imgui_demo.cpp">
+      <Filter>Library\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Library\imgui\imgui_draw.cpp">
+      <Filter>Library\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Library\imgui\imgui_impl_dx11.cpp">
+      <Filter>Library\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Library\imgui\imgui_impl_win32.cpp">
+      <Filter>Library\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Library\imgui\imgui_stdlib.cpp">
+      <Filter>Library\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Library\imgui\imgui_tables.cpp">
+      <Filter>Library\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Library\imgui\imgui_widgets.cpp">
+      <Filter>Library\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Application\Object\BackGround\BackGround.cpp">
+      <Filter>Src\Application\Object\BackGround</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Application\Object\Ground\Ground.cpp">
+      <Filter>Src\Application\Object\Ground</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Application\Object\Player\Player.cpp">
+      <Filter>Src\Application\Object\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Application\Object\Enemy\Enemy.cpp">
+      <Filter>Src\Application\Object\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Application\Object\Attack\Attack.cpp">
+      <Filter>Src\Application\Object\Attack</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

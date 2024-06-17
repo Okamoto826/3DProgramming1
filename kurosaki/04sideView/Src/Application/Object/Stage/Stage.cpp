@@ -5,6 +5,7 @@ void Stage::Init()
 	m_model = std::make_shared<KdModelData>();
 	m_model->Load("Asset/Models/SideViewMap/SideViewMap.gltf");
 
+
 	Math::Matrix transMat;
 	transMat = Math::Matrix::CreateTranslation(0, -2, 0);
 	Math::Matrix scaleMat;
@@ -20,6 +21,5 @@ void Stage::Init()
 
 void Stage::DrawLit()
 {
-	
 	KdShaderManager::Instance().m_StandardShader.DrawModel(*m_model,m_mWorld);
 }

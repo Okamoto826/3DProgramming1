@@ -79,6 +79,15 @@
     <Filter Include="Src\Application\Object\Player">
       <UniqueIdentifier>{dabfb21c-7eaa-4455-9806-0854e7eceeda}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Src\Application\Object\Back">
+      <UniqueIdentifier>{a439ba96-b125-489b-8b8a-189ff1caf902}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Src\Application\Object\Cannon">
+      <UniqueIdentifier>{c34d7c80-f886-4fa2-ba65-ea776a64eade}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Src\Application\Object\Enemy">
+      <UniqueIdentifier>{fa827b27-1e98-4f13-b8fb-bd608bf19125}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Pch.h">
@@ -252,6 +261,18 @@
     <ClInclude Include="Src\Application\Object\Player\Player.h">
       <Filter>Src\Application\Object\Player</Filter>
     </ClInclude>
+    <ClInclude Include="Src\Application\Object\Back\Back.h">
+      <Filter>Src\Application\Object\Back</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Application\Object\Stage\ship.h">
+      <Filter>Src\Application\Object\Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Application\Object\Cannon\Cannon.h">
+      <Filter>Src\Application\Object\Cannon</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Application\Object\Enemy\Enemy.h">
+      <Filter>Src\Application\Object\Enemy</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Pch.cpp">
@@ -397,6 +418,18 @@
     </ClCompile>
     <ClCompile Include="Src\Application\Object\Player\Player.cpp">
       <Filter>Src\Application\Object\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Application\Object\Back\Back.cpp">
+      <Filter>Src\Application\Object\Back</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Application\Object\Stage\ship.cpp">
+      <Filter>Src\Application\Object\Stage</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Application\Object\Cannon\Cannon.cpp">
+      <Filter>Src\Application\Object\Cannon</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Application\Object\Enemy\Enemy.cpp">
+      <Filter>Src\Application\Object\Enemy</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
