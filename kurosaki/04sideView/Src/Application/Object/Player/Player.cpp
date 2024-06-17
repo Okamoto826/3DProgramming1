@@ -14,7 +14,7 @@ void Player::Init()
 	
 	m_nowSpl = 0;
 	m_gravity = 0;
-	m_pos = { -50,0,0 };
+	m_pos = { -10,0,0 };
 
 	m_pDebugWire = std::make_unique<KdDebugWireFrame>();
 }
@@ -26,6 +26,12 @@ void Player::GenerateDepthMapFromLight()
 
 void Player::DrawLit()
 {
+	// ディゾルブ（溶ける）
+	static float d = 0;
+	d += 0.01;
+	if (d > 1)d = 0;
+	KdShaderManager::Instance().m_StandardShader.SetDissolve(d);
+
 	KdShaderManager::Instance().m_StandardShader.DrawPolygon(m_polygon,m_mWorld);
 }
 
@@ -33,7 +39,8 @@ void Player::Update()
 {
 	int Run[4] = { 24,25,24,26 };
 
-	m_polygon.SetUVRect(Run[(int)m_nowSpl]);
+	//m_polygon.SetUVRect(Run[(int)m_nowSpl]);
+	m_polygon.SetUVRect(32);
 	m_nowSpl += 0.1;
 	if (m_nowSpl >= 4)
 	{

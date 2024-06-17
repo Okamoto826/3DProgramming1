@@ -157,9 +157,11 @@
     <ClInclude Include="..\Library\tinygltf\stb_image_write.h" />
     <ClInclude Include="..\Library\tinygltf\tiny_gltf.h" />
     <ClInclude Include="Src\Application\main.h" />
+    <ClInclude Include="Src\Application\Object\Back\Back.h" />
     <ClInclude Include="Src\Application\Object\Chara\BaseChara.h" />
     <ClInclude Include="Src\Application\Object\Chara\CharaManager.h" />
     <ClInclude Include="Src\Application\Object\Chara\LeafRanger\LeafRanger.h" />
+    <ClInclude Include="Src\Application\Object\Stage\Stage.h" />
     <ClInclude Include="Src\Application\Scene\BaseScene\BaseScene.h" />
     <ClInclude Include="Src\Application\Scene\GameScene\GameScene.h" />
     <ClInclude Include="Src\Application\Scene\SceneManager.h" />
@@ -210,9 +212,11 @@
     <ClCompile Include="..\Library\imgui\imgui_tables.cpp" />
     <ClCompile Include="..\Library\imgui\imgui_widgets.cpp" />
     <ClCompile Include="Src\Application\main.cpp" />
+    <ClCompile Include="Src\Application\Object\Back\Back.cpp" />
     <ClCompile Include="Src\Application\Object\Chara\BaseChara.cpp" />
     <ClCompile Include="Src\Application\Object\Chara\CharaManager.cpp" />
     <ClCompile Include="Src\Application\Object\Chara\LeafRanger\LeafRanger.cpp" />
+    <ClCompile Include="Src\Application\Object\Stage\Stage.cpp" />
     <ClCompile Include="Src\Application\Scene\BaseScene\BaseScene.cpp" />
     <ClCompile Include="Src\Application\Scene\GameScene\GameScene.cpp" />
     <ClCompile Include="Src\Application\Scene\SceneManager.cpp" />

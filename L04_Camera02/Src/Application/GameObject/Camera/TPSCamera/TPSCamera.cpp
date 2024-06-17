@@ -21,7 +21,7 @@ void TPSCamera::Update()
 	const std::shared_ptr<const KdGameObject> _spTarget = m_wpTarget.lock();
 	if (_spTarget)
 	{
-		_targetMat = _spTarget->GetMatrix();
+		_targetMat = Math::Matrix::CreateTranslation(_spTarget->GetPos());
 	}
 
 	// カメラの回転

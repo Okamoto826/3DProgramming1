@@ -36,6 +36,13 @@ void GameScene::Event()
 	Math::Vector3 cameraPos = { 3.0f,1.5f,-5.0f };
 	transMat = Math::Matrix::CreateTranslation(cameraPos + playerPos);
 	m_camera->SetCameraMatrix(transMat);
+
+	// 被写界深度
+	m_camera->SetFocus(5.f, 2.f, 8.f);
+
+	// ブルーム
+	KdShaderManager::Instance().m_postProcessShader.SetBrightThreshold(0.7f);
+
 }
 
 void GameScene::Init()
@@ -47,10 +54,16 @@ void GameScene::Init()
 	//①平行光（ディレクションライト）
 	KdShaderManager::Instance().WorkAmbientController().SetDirLight({ 0,-1,0.1 }, { 3,3,3 });
 
-	//②フォグ（霧）
-	KdShaderManager::Instance().WorkAmbientController().SetFogEnable(true,false);
+	//②フォグ（霧）												距離　　高さ
+	KdShaderManager::Instance().WorkAmbientController().SetFogEnable(false, false);
 	//																		色		濃さ
 	KdShaderManager::Instance().WorkAmbientController().SetDistanceFog({ 0.3,0,0.6 }, 0.1);
+	//																	色　	上	下	距離	
+	KdShaderManager::Instance().WorkAmbientController().SetheightFog({ 1,1,1 }, 0, -2, 0);
+
+	//③環境光（アンビエントライト）
+	//画面が暗すぎるときに調整する（デフォルト0.3）
+	//KdShaderManager::Instance().WorkAmbientController().SetAmbientLight({ 1, 1, 1, 1 });
 
 
 	// ①ポインタを作成(このポインタ何も入っていない)

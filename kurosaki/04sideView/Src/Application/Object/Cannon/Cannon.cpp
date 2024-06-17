@@ -24,3 +24,8 @@ void Cannon::DrawLit()
 {
 	KdShaderManager::Instance().m_StandardShader.DrawModel(*m_model, m_mWorld);
 }
+
+void Cannon::DrawBright()
+{
+	KdShaderManager::Instance().m_StandardShader.DrawModel(*m_model, m_mWorld);
+}

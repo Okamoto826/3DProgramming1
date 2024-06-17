@@ -9,7 +9,8 @@ public:
 		Move	=1<<1,
 		Skill	=1<<2,
 		Skill2	=1<<3,
-		Down	=1<<4
+		Hit		=1<<4,
+		Down	=1<<5
 	};
 
 	// アニメーション情報

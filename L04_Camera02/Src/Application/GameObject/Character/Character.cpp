@@ -36,7 +36,10 @@ void Character::Update()
 	UpdateRotate(moveVec);
 
 	// キャラクターのワールド行列を創る処理
-	m_mWorld = Math::Matrix::CreateTranslation(nowPos);
+	Math::Matrix _rotation = Math::Matrix::CreateRotationY(DirectX::XMConvertToRadians(m_worldRot.y));
+
+	// キャラクターのワールド行列を創る処理
+	m_mWorld = _rotation * Math::Matrix::CreateTranslation(nowPos);
 }
 
 void Character::DrawLit()
@@ -59,5 +62,20 @@ void Character::UpdateRotate(const Math::Vector3& srcMoveVec)
 	Math::Vector3 _targetDir = srcMoveVec;
 	_targetDir.Normalize();
 
+	float _nowAng = atan2(_nowDir.x, _nowDir.z);
+	_nowAng = DirectX::XMConvertToDegrees(_nowAng);
+
+	float _targetAng = atan2(_targetDir.x, _targetDir.z);
+	_targetAng = DirectX::XMConvertToDegrees(_targetAng);
+
+	// 角度の差分を求める
+	float _betweenAng = _targetAng - _nowAng;
+	if (_betweenAng > 180)
+	{
+		_betweenAng -= 360;
+	}
+
+	float _rotateAng = std::clamp(_betweenAng, -8.f, 8.f);
+	m_worldRot.y += _rotateAng;
 }
 

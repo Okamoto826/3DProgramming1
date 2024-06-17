@@ -1,14 +1,13 @@
 ﻿#pragma once
 
-class Cannon :public KdGameObject
+class Stage :public KdGameObject
 {
 public:
-	Cannon() { Init(); }
-	~Cannon() {}
+	Stage() { Init(); }
+	~Stage() {}
 
 	void Init()override;
 	void DrawLit()override;
-	void DrawBright()override;
 private:
 
 	std::shared_ptr<KdModelData> m_model;
