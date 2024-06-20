@@ -7,7 +7,7 @@ void Stage::Init()
 
 
 	Math::Matrix transMat;
-	transMat = Math::Matrix::CreateTranslation(-10, -2, 0);
+	transMat = Math::Matrix::CreateTranslation(-10, -3, 0);
 	Math::Matrix scaleMat;
 	scaleMat = Math::Matrix::CreateScale(5.0, 1, 1);
 

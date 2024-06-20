@@ -2,11 +2,11 @@
 
 void Back::Init()
 {
-	m_polygon.SetMaterial("Asset/Textures/back.png");
+	m_polygon.SetMaterial("Asset/Textures/Back/back.png");
 	Math::Matrix transMat;
-	transMat = Math::Matrix::CreateTranslation(0, 0, 50);
+	transMat = Math::Matrix::CreateTranslation(0, 0, 60);
 	Math::Matrix scaleMat;
-	scaleMat = Math::Matrix::CreateScale(150, 100, 1);
+	scaleMat = Math::Matrix::CreateScale(300, 100, 1);
 
 	// 行列の合成は基本的にSRT
 	m_mWorld = scaleMat * transMat;

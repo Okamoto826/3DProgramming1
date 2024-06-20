@@ -29,9 +29,16 @@ public:
 		return Math::Matrix::CreateRotationY
 			(DirectX::XMConvertToRadians(m_DegAng.y));
 	}
+
+	void RegistHitObject(const std::shared_ptr<KdGameObject>& object)
+	{
+		m_wpHitObjectList.push_back(object);
+	}
+
 protected:
-	std::shared_ptr<KdCamera>   m_spCamera = nullptr;
-	std::weak_ptr<KdGameObject> m_wpTarget;
+	std::shared_ptr<KdCamera>					m_spCamera = nullptr;
+	std::weak_ptr<KdGameObject>					m_wpTarget;
+	std::vector<std::weak_ptr<KdGameObject>>	m_wpHitObjectList{};
 
 	Math::Matrix			m_LocalPos;
 	Math::Matrix			m_Rotation;

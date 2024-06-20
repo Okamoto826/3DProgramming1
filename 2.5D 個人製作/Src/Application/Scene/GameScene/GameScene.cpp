@@ -3,11 +3,20 @@
 #include"../../Object/Stage/Stage.h"
 #include"../../Object/Chara/CharaManager.h"
 #include"../../Object/Back/Back.h"
+#include"../../Object/Back/BackGrass.h"
+#include"../../Object/Back/BackTree.h"
 
 void GameScene::Event()
 {
-	// カメラの座標行列を作成
-	Math::Vector3 cameraPos = { 0.f,0.f,-5.0f };
+
+	if (GetAsyncKeyState(VK_LEFT) & 0x8000)
+	{
+		cameraPos.x -= 0.1;
+	}
+	if (GetAsyncKeyState(VK_RIGHT) & 0x8000)
+	{
+		cameraPos.x += 0.1;
+	}
 	Math::Matrix transmat = Math::Matrix::CreateTranslation(cameraPos);
 
 	// 行列を合成
@@ -31,6 +40,7 @@ void GameScene::Init()
 {
 	// カメラ　生成＆視野角設定
 	m_camera = std::make_unique<KdCamera>();	// 1 メモリ確保
+	cameraPos = { 0.f,0.f,-5.0f };
 
 	//②フォグ（霧）												距離　　高さ
 	KdShaderManager::Instance().WorkAmbientController().SetFogEnable(false, false);
@@ -45,6 +55,14 @@ void GameScene::Init()
 	std::shared_ptr<Back> back;
 	back = std::make_shared<Back>();
 	m_objList.push_back(back);
+
+	std::shared_ptr<BackGrass> backgrass;
+	backgrass = std::make_shared<BackGrass>();
+	m_objList.push_back(backgrass);
+
+	std::shared_ptr<BackTree> backtree;
+	backtree = std::make_shared<BackTree>();
+	m_objList.push_back(backtree);
 
 	std::shared_ptr<CharaManager> charaManager;
 	charaManager = std::make_shared<CharaManager>();

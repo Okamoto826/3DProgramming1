@@ -53,6 +53,7 @@ protected:
 	int m_hpMax;
 	int m_atack;
 	int m_atack2;
-
+	float d;
+	float m_gravity;
 	float m_speed;
 };

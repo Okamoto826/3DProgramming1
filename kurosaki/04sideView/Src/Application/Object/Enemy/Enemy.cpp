@@ -30,6 +30,10 @@ void Enemy::DrawLit()
 
 void Enemy::Update()
 {
+	// ポイントライト（点光源）//
+	//	MAX100個まで													色		半径				座標
+	KdShaderManager::Instance().WorkAmbientController().AddPointLight({ 3,3,3 }, 5.0, m_pos + Math::Vector3(0, 0.5, 0));
+
 	int Walk[4] = { 3,4,3,5 };
 
 	m_polygon.SetUVRect(Walk[(int)m_nowSpl]);

@@ -85,6 +85,12 @@
     <Filter Include="Src\Application\Object\Stage">
       <UniqueIdentifier>{82ade8b2-e252-4953-a545-c76d2b45d0b4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Src\Application\Object\Chara\CrystalMauler">
+      <UniqueIdentifier>{631750b2-c1fc-4acf-b40d-482540bb297e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Src\Application\Object\Chara\GroudMonk">
+      <UniqueIdentifier>{f3a996ac-cb8e-4065-867d-9b0d50af5fc7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Pch.h">
@@ -267,6 +273,18 @@
     <ClInclude Include="Src\Application\Object\Stage\Stage.h">
       <Filter>Src\Application\Object\Stage</Filter>
     </ClInclude>
+    <ClInclude Include="Src\Application\Object\Chara\CrystalMauler\CrystalMauler.h">
+      <Filter>Src\Application\Object\Chara\CrystalMauler</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Application\Object\Back\BackGrass.h">
+      <Filter>Src\Application\Object\Back</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Application\Object\Back\BackTree.h">
+      <Filter>Src\Application\Object\Back</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Application\Object\Chara\GroundMonk\GroundMonk.h">
+      <Filter>Src\Application\Object\Chara\GroudMonk</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Pch.cpp">
@@ -421,6 +439,18 @@
     </ClCompile>
     <ClCompile Include="Src\Application\Object\Stage\Stage.cpp">
       <Filter>Src\Application\Object\Stage</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Application\Object\Chara\CrystalMauler\CrystalMauler.cpp">
+      <Filter>Src\Application\Object\Chara\CrystalMauler</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Application\Object\Back\BackGrass.cpp">
+      <Filter>Src\Application\Object\Back</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Application\Object\Back\BackTree.cpp">
+      <Filter>Src\Application\Object\Back</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Application\Object\Chara\GroundMonk\GroundMonk.cpp">
+      <Filter>Src\Application\Object\Chara\GroudMonk</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

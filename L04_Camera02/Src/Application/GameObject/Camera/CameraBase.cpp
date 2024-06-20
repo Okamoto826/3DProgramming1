@@ -11,7 +11,6 @@ void CameraBase::Init()
 void CameraBase::Update()
 {
 	if (!m_spCamera)return;
-
 	m_spCamera->SetCameraMatrix(m_mWorld);
 }
 

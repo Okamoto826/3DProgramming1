@@ -7,6 +7,7 @@
 #include"../../Object/Stage/ship.h"
 #include"../../Object/Cannon/Cannon.h"
 #include"../../Object/Enemy/Enemy.h"
+#include"../../Object/UI/UI.h"
 
 void GameScene::Event()
 {
@@ -38,10 +39,10 @@ void GameScene::Event()
 	m_camera->SetCameraMatrix(transMat);
 
 	// 被写界深度
-	m_camera->SetFocus(5.f, 2.f, 8.f);
+	//m_camera->SetFocus(5.f, 2.f, 8.f);
 
 	// ブルーム
-	KdShaderManager::Instance().m_postProcessShader.SetBrightThreshold(0.7f);
+	//KdShaderManager::Instance().m_postProcessShader.SetBrightThreshold(0.7f);
 
 }
 
@@ -118,4 +119,8 @@ void GameScene::Init()
 	std::shared_ptr<Cannon> cannon;
 	cannon = std::make_shared<Cannon>();
 	m_objList.push_back(cannon);
+
+	std::shared_ptr<UI> ui;
+	ui = std::make_shared<UI>();
+	m_objList.push_back(ui);
 }

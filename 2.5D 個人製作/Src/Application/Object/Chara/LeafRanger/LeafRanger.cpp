@@ -18,6 +18,8 @@ void LeafRanger::Update()
 	}
 	// UV(切り取るコマ)を設定
 	m_polygon.SetUVRect(animeCnt);
+
+	BaseChara::Update();
 }
 
 
@@ -25,48 +27,48 @@ void LeafRanger::Init()
 {
 	BaseChara::Init();
 	// 板ポリにテクスチャ(マテリアル)をロード
-	m_polygon.SetMaterial("Asset/Textures/leafranger.png");
+	m_polygon.SetMaterial("Asset/Textures/Chara/leafranger.png");
 
 	//　板ポリの基準点 (真ん中下段を指定)
 	m_polygon.SetPivot(KdSquarePolygon::PivotType::Center_Bottom);
 
 	m_polygon.SetSplit(9, 9);
 	m_polygon.SetUVRect(0);
-	m_polygon.SetScale(2.0);
-	m_nowSit = NowCharaSit::Down;
-	m_pos={ 0,0,-1 };
+	m_polygon.SetScale(3.0);
+	m_nowSit = NowCharaSit::Idle;
+	m_pos={ -1,0,0 };
 	ChangeAnimation();
 	
 }
 
 void LeafRanger::ChangeAnimation()
 {
-	if (m_nowSit & NowCharaSit::Idle)	
+	if (m_nowSit & NowCharaSit::Idle)
 	{
 		m_animationInfo.start = 0;		// 開始コマ
 		m_animationInfo.end = 11;		// 終了コマ	
 	}
-	if (m_nowSit & NowCharaSit::Move) 
+	if (m_nowSit & NowCharaSit::Move)
 	{
 		m_animationInfo.start = 12;		// 開始コマ
 		m_animationInfo.end = 21;		// 終了コマ
 	}
-	if (m_nowSit & NowCharaSit::Skill) 
+	if (m_nowSit & NowCharaSit::Skill)
 	{
 		m_animationInfo.start = 22;		// 開始コマ
 		m_animationInfo.end = 36;		// 終了コマ
 	}
-	if (m_nowSit & NowCharaSit::Skill2) 
+	if (m_nowSit & NowCharaSit::Skill2)
 	{
 		m_animationInfo.start = 37;		// 開始コマ
 		m_animationInfo.end = 53;		// 終了コマ
 	}
-	if (m_nowSit & NowCharaSit::Hit) 
+	if (m_nowSit & NowCharaSit::Hit)
 	{
 		m_animationInfo.start = 54;		// 開始コマ
 		m_animationInfo.end = 59;		// 終了コマ
 	}
-	if (m_nowSit & NowCharaSit::Down) 
+	if (m_nowSit & NowCharaSit::Down)
 	{
 		m_animationInfo.start = 60;		// 開始コマ
 		m_animationInfo.end = 78;		// 終了コマ
