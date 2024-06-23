@@ -167,6 +167,10 @@
     <ClInclude Include="Src\Application\Object\Chara\LeafRanger\Beam.h" />
     <ClInclude Include="Src\Application\Object\Chara\LeafRanger\LeafRanger.h" />
     <ClInclude Include="Src\Application\Object\Chara\LeafRanger\Arrow.h" />
+    <ClInclude Include="Src\Application\Object\Enemy\EnemyBase.h" />
+    <ClInclude Include="Src\Application\Object\Enemy\EnemyManager.h" />
+    <ClInclude Include="Src\Application\Object\Enemy\Goblin\Goblin.h" />
+    <ClInclude Include="Src\Application\Object\Enemy\MushRoom\MushRoom.h" />
     <ClInclude Include="Src\Application\Object\Stage\Stage.h" />
     <ClInclude Include="Src\Application\Scene\BaseScene\BaseScene.h" />
     <ClInclude Include="Src\Application\Scene\GameScene\GameScene.h" />
@@ -228,6 +232,10 @@
     <ClCompile Include="Src\Application\Object\Chara\LeafRanger\Beam.cpp" />
     <ClCompile Include="Src\Application\Object\Chara\LeafRanger\LeafRanger.cpp" />
     <ClCompile Include="Src\Application\Object\Chara\LeafRanger\Arrow.cpp" />
+    <ClCompile Include="Src\Application\Object\Enemy\EnemyBase.cpp" />
+    <ClCompile Include="Src\Application\Object\Enemy\EnemyManager.cpp" />
+    <ClCompile Include="Src\Application\Object\Enemy\Goblin\Goblin.cpp" />
+    <ClCompile Include="Src\Application\Object\Enemy\MushRoom\MushRoom.cpp" />
     <ClCompile Include="Src\Application\Object\Stage\Stage.cpp" />
     <ClCompile Include="Src\Application\Scene\BaseScene\BaseScene.cpp" />
     <ClCompile Include="Src\Application\Scene\GameScene\GameScene.cpp" />

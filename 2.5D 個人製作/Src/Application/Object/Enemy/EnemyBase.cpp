@@ -1,8 +1,8 @@
-﻿#include "BaseChara.h"
+﻿#include "EnemyBase.h"
 #include"../../Scene/SceneManager.h"
-void BaseChara::Update()
+void EnemyBase::Update()
 {
-	if(d==0)
+	if (d == 0)
 	{
 		m_pos.y -= m_gravity;
 		m_gravity += 0.005;
@@ -13,7 +13,7 @@ void BaseChara::Update()
 	m_mWorld = transMat;
 }
 
-void BaseChara::PostUpdate()
+void EnemyBase::PostUpdate()
 {
 	// ================================================
 	// レイ判定
@@ -36,7 +36,9 @@ void BaseChara::PostUpdate()
 	// 当たり判定をしたいタイプを設定
 	ray.m_type = KdCollider::TypeGround;
 
-	
+	// デバッグ用
+	//m_pDebugWire->AddDebugLine(ray.m_pos, ray.m_dir, ray.m_range);
+
 
 	// レイに当たったオブジェクト情報を格納
 	std::list<KdCollider::CollisionResult> retRayList;
@@ -66,75 +68,28 @@ void BaseChara::PostUpdate()
 		m_pos = hitPos + Math::Vector3(0, -0.1f, 0);
 		m_gravity = 0;
 	}
-
-	// ===============================
-	//    球判定
-	// ===============================
-
-	// 球判定用の変数を設定
-	KdCollider::SphereInfo sphere;
-	// 球の中心位置を設定(座標)
-	sphere.m_sphere.Center = m_pos + Math::Vector3(0, 0.5f, 0);
-	// 球の半径を設定
-	sphere.m_sphere.Radius = 0.3f;
-	// 当たり判定したいタイプを設定
-	sphere.m_type = KdCollider::TypeGround;
-
-	// 球に当たったオブジェクト情報を格納
-	std::list<KdCollider::CollisionResult> retSphereList;
-
-	// 当たり判定
-	for (auto& obj : SceneManager::Instance().GetObjList())
-	{
-		obj->Intersects(sphere, &retSphereList);
-	}
-
-	// 球に当たったオブジェクトを検出
-	maxOverLap = 0;
-	Math::Vector3 hitDir;
-	isHit = false;
-	for (auto& ret : retSphereList)
-	{
-		if (maxOverLap < ret.m_overlapDistance)
-		{
-			maxOverLap = ret.m_overlapDistance;
-			hitDir = ret.m_hitDir;
-			isHit = true;
-		}
-	}
-	if (isHit)
-	{
-		// Z方向への押し返し無効
-		hitDir.z = 0;
-		// 方向ベクトルは長さを1にしないといけない
-		// 正規化(長さを１にする)
-		hitDir.Normalize();
-
-		// 押し戻し処理
-		m_pos += hitDir * maxOverLap;
-	}
 	m_mWorld = Math::Matrix::CreateTranslation(m_pos);
 }
 
-void BaseChara::GenerateDepthMapFromLight()
+void EnemyBase::GenerateDepthMapFromLight()
 {
 	KdShaderManager::Instance().m_StandardShader.DrawPolygon(m_polygon, m_mWorld);
 }
 
-void BaseChara::DrawLit()
+void EnemyBase::DrawLit()
 {
 	d -= 0.01;
 	if (d < 0)d = 0;
-	if(d!=0)
+	if (d != 0)
 	{
 		KdShaderManager::Instance().m_StandardShader.SetDissolve(d);
 	}
 	KdShaderManager::Instance().m_StandardShader.DrawPolygon(m_polygon, m_mWorld);
 }
 
-void BaseChara::Init()
+void EnemyBase::Init()
 {
-	m_pos = {-25,-2.5,0};
+	m_pos = { 0,-2.5,0 };
 	m_dir = {};
 	m_nowSit = 0;
 	m_gravity = 0.0f;
@@ -145,23 +100,18 @@ void BaseChara::Init()
 
 	m_pDebugWire = std::make_unique<KdDebugWireFrame>();
 
-	m_objectType = ObjectType::Player;
-
-	// 当たり判定用
-	m_pCollider = std::make_unique<KdCollider>();
-	m_pCollider->RegisterCollisionShape
-	("PlayerCollision", { 0,0.5f,0 }, 0.3, KdCollider::TypeDamage);
+	m_objectType = ObjectType::Enemy;
 }
 
-void BaseChara::ChangeAnimation()
+void EnemyBase::ChangeAnimation()
 {
 }
 
-void BaseChara::Atack()
+void EnemyBase::Atack()
 {
 }
 
-void BaseChara::OnHit(float _dmg)
+void EnemyBase::OnHit(float _dmg)
 {
 }
 

@@ -91,6 +91,15 @@
     <Filter Include="Src\Application\Object\Chara\GroudMonk">
       <UniqueIdentifier>{f3a996ac-cb8e-4065-867d-9b0d50af5fc7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Src\Application\Object\Enemy">
+      <UniqueIdentifier>{0fa183bc-2825-498a-adac-4c24f6817408}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Src\Application\Object\Enemy\MushRoom">
+      <UniqueIdentifier>{d9dff0c7-0c56-40eb-807c-e4b4bb07ee06}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Src\Application\Object\Enemy\Goblin">
+      <UniqueIdentifier>{683364d9-b4dd-47d7-913f-99ec240c893d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Pch.h">
@@ -291,6 +300,18 @@
     <ClInclude Include="Src\Application\Object\Chara\LeafRanger\Beam.h">
       <Filter>Src\Application\Object\Chara\LeafRnger</Filter>
     </ClInclude>
+    <ClInclude Include="Src\Application\Object\Enemy\EnemyManager.h">
+      <Filter>Src\Application\Object\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Application\Object\Enemy\EnemyBase.h">
+      <Filter>Src\Application\Object\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Application\Object\Enemy\MushRoom\MushRoom.h">
+      <Filter>Src\Application\Object\Enemy\MushRoom</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Application\Object\Enemy\Goblin\Goblin.h">
+      <Filter>Src\Application\Object\Enemy\Goblin</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Pch.cpp">
@@ -463,6 +484,18 @@
     </ClCompile>
     <ClCompile Include="Src\Application\Object\Chara\LeafRanger\Beam.cpp">
       <Filter>Src\Application\Object\Chara\LeafRnger</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Application\Object\Enemy\EnemyManager.cpp">
+      <Filter>Src\Application\Object\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Application\Object\Enemy\EnemyBase.cpp">
+      <Filter>Src\Application\Object\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Application\Object\Enemy\MushRoom\MushRoom.cpp">
+      <Filter>Src\Application\Object\Enemy\MushRoom</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Application\Object\Enemy\Goblin\Goblin.cpp">
+      <Filter>Src\Application\Object\Enemy\Goblin</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

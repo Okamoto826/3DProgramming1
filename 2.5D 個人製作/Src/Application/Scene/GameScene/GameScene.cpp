@@ -5,6 +5,7 @@
 #include"../../Object/Back/Back.h"
 #include"../../Object/Back/BackGrass.h"
 #include"../../Object/Back/BackTree.h"
+#include"../../Object/Enemy/EnemyManager.h"
 
 void GameScene::Event()
 {
@@ -78,5 +79,8 @@ void GameScene::Init()
 	std::shared_ptr<CharaManager> charaManager;
 	charaManager = std::make_shared<CharaManager>();
 	m_objList.push_back(charaManager);
-	
+
+	std::shared_ptr<EnemyManager> enemyManager;
+	enemyManager = std::make_shared<EnemyManager>();
+	m_objList.push_back(enemyManager);
 }

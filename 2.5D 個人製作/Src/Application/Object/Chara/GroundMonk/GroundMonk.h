@@ -13,5 +13,8 @@ public:
 
 	void ChangeAnimation();
 
+	void Atack() override;
+
+	void OnHit(float _dmg)override;
 private:
 };

@@ -25,4 +25,5 @@ private:
 	float m_speed = 0.02;
 	float m_nowSpl;
 	float m_gravity;
+	float m_hp = 100;
 };

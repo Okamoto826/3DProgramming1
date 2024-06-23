@@ -48,7 +48,7 @@ void Arrow::PostUpdate()
 	sphere.m_type = KdCollider::TypeGround | KdCollider::TypeDamage;
 
 	// デバッグ用
-	m_pDebugWire->AddDebugSphere(sphere.m_sphere.Center, sphere.m_sphere.Radius);
+	//m_pDebugWire->AddDebugSphere(sphere.m_sphere.Center, sphere.m_sphere.Radius);
 
 	// 球に当たったオブジェクト情報を格納
 	std::list<KdCollider::CollisionResult> retSphereList;
@@ -62,7 +62,7 @@ void Arrow::PostUpdate()
 			if (obj->GetObjectType() == KdGameObject::ObjectType::Enemy)
 			{
 				// 敵確定
-				obj->OnHit();
+				obj->OnHit(100.f);
 				OnHit();
 			}
 		}
@@ -80,4 +80,5 @@ void Arrow::OnHit()
 {
 	m_nowSt = NowSt::Hit;
 	m_polygon.SetUVRect(0);
+	m_isExpired = true;
 }

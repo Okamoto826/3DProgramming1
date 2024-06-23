@@ -11,6 +11,10 @@ public:
 
 	void Init() override;
 
+	void OnHit(float _dmg)override;
+
+	void Atack() override;
+
 	void ChangeAnimation();
 
 private:

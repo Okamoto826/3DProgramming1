@@ -325,7 +325,8 @@ void Application::Execute()
 		// フレームレート制御
 		//
 		//=========================================
-
+		std::string titleBar = "TOWER DEFEND | FPS:" + std::to_string(m_fpsController.m_nowfps);
+		SetWindowTextA(m_window.GetWndHandle(), titleBar.c_str());
 		m_fpsController.Update();
 	}
 

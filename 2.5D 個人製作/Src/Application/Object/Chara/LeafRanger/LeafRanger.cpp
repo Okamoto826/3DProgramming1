@@ -7,9 +7,6 @@ void LeafRanger::Update()
 	// 召喚中はリターン
 	if (d != 0)return;
 
-	if(m_nowSit&NowCharaSit::Idle)m_nowSit = NowCharaSit::Move;
-	
-
 	// アニメーション更新
 	int animeCnt;
 	m_animationInfo.count += m_animationInfo.speed;
@@ -38,7 +35,8 @@ void LeafRanger::Update()
 		arrow->SetPos(m_pos + Math::Vector3(0.35, 0.8, 0));
 		SceneManager::Instance().AddObject(arrow);
 	}
-	if (GetAsyncKeyState(VK_SPACE))OnHit(50.f);
+
+	//if (GetAsyncKeyState(VK_SPACE))OnHit(50.f);
 
 
 	m_animationInfo.oldCount = animeCnt;
@@ -48,7 +46,7 @@ void LeafRanger::Update()
 		ChangeAnimation();
 	}
 	m_oldSit = m_nowSit;
-
+	if (m_nowSit & NowCharaSit::Idle)m_nowSit = NowCharaSit::Move;
 
 	if (m_nowSit & NowCharaSit::Idle || m_nowSit & NowCharaSit::Move)
 	{
@@ -66,9 +64,7 @@ void LeafRanger::Update()
 		// 当たり判定したいタイプを設定
 		sphere.m_type = KdCollider::TypeDamage;
 
-		// デバッグ用
-		m_pDebugWire->AddDebugSphere(sphere.m_sphere.Center, sphere.m_sphere.Radius);
-
+		
 		// 球に当たったオブジェクト情報を格納
 		std::list<KdCollider::CollisionResult> retSphereList;
 
@@ -80,10 +76,13 @@ void LeafRanger::Update()
 				// 当たったのが敵かどうか
 				if (obj->GetObjectType() == KdGameObject::ObjectType::Enemy)
 				{
-					m_nowSit& NowCharaSit::Idle;
+					m_nowSit= NowCharaSit::Idle;
 					Atack();
 				}
+				
+
 			}
+			
 		}
 	}
 	
@@ -159,16 +158,14 @@ void LeafRanger::Atack()
 	m_MP++;
 	if(m_atkCoolTime >= 120)
 	{
-		if (m_nowSit & NowCharaSit::Idle || m_nowSit & NowCharaSit::Move)
+		m_nowSit = NowCharaSit::Skill;
+		if (m_MP > 300)
 		{
-			m_nowSit = NowCharaSit::Skill;
-			if (m_MP > 300)
-			{
-				m_nowSit = NowCharaSit::Skill2;
-				m_MP = 0;
-			}
-			m_atkCoolTime = 0;
+			m_nowSit = NowCharaSit::Skill2;
+			m_MP = 0;
 		}
+		m_atkCoolTime = 0;
+		
 	}
 }
 

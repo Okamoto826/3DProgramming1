@@ -37,6 +37,13 @@ void Enemy::DrawLit()
 
 void Enemy::Update()
 {
+	if (m_hp <= 0)
+	{
+		// 倒れる前に行いたい処理
+
+		m_isExpired = true;
+	}
+
 	// ポイントライト（点光源）//
 	//	MAX100個まで													色		半径				座標
 	KdShaderManager::Instance().WorkAmbientController().AddPointLight({ 3,3,3 }, 5.0, m_pos + Math::Vector3(0, 0.5, 0));
@@ -181,5 +188,5 @@ void Enemy::PostUpdate()
 
 void Enemy::OnHit()
 {
-	m_isExpired = true;
+	m_hp = 0;
 }
