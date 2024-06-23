@@ -7,7 +7,7 @@ void BaseChara::Update()
 		m_pos.y -= m_gravity;
 		m_gravity += 0.005;
 	}
-
+	m_atkCoolTime++;
 	Math::Matrix transMat;
 	transMat = Math::Matrix::CreateTranslation(m_pos);
 	m_mWorld = transMat;
@@ -139,14 +139,29 @@ void BaseChara::DrawLit()
 
 void BaseChara::Init()
 {
-	m_pos = {};
+	m_pos = {-25,-2.5,0};
 	m_dir = {};
 	m_nowSit = 0;
 	m_gravity = 0.0f;
+	m_atkCoolTime = 0;
 	d = 1;
 	// 奥側に座標(ワールド行列)を更新しておく
 	m_mWorld = Math::Matrix::Identity;
 
 	m_pDebugWire = std::make_unique<KdDebugWireFrame>();
+
+	m_objectType = ObjectType::Player;
+}
+
+void BaseChara::ChangeAnimation()
+{
+}
+
+void BaseChara::Atack()
+{
+}
+
+void BaseChara::OnHit(float _dmg)
+{
 }
 

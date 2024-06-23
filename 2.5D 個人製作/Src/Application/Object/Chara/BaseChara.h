@@ -19,20 +19,23 @@ public:
 		int start;		// 開始コマ
 		int end;		// 終了コマ
 		float count;	// 現在のコマ数カウント
+		int oldCount;	// 1フレーム前のコマ
 		float speed;	// アニメーションの速度
 	};
 
 	BaseChara() { Init(); }
 	~BaseChara() override {}
 
-	void Update() override;
-	void PostUpdate() override;
+	virtual void Update() override;
+	virtual void PostUpdate() override;
 
-	void GenerateDepthMapFromLight() override;
-	void DrawLit() override;
+	virtual void GenerateDepthMapFromLight() override;
+	virtual void DrawLit() override;
 
-	void Init() override;
-
+	virtual void Init() override;
+	virtual void ChangeAnimation();
+	virtual void Atack();
+	virtual void OnHit(float _dmg)override;
 private:
 
 protected:
@@ -46,13 +49,16 @@ protected:
 
 	// キャラの状態 ビット管理
 	UINT m_nowSit;
+	UINT m_oldSit;
 
 	Math::Vector3 m_pos;
 	Math::Vector3 m_dir;
 	int m_hp;
 	int m_hpMax;
-	int m_atack;
-	int m_atack2;
+	int m_atk;
+	int m_SPatk;
+	int m_MP;
+	int m_atkCoolTime;
 	float d;
 	float m_gravity;
 	float m_speed;

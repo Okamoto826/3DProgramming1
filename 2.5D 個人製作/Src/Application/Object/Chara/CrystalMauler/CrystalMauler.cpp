@@ -13,12 +13,22 @@ void CrystalMauler::Update()
 	// 最後のコマまで行進し終えたらループさせる
 	if (animeCnt > m_animationInfo.end)
 	{
+		if (m_oldSit & NowCharaSit::Down)
+		{
+			m_isExpired = true;
+			return;
+		}
 		animeCnt = m_animationInfo.start;
 		m_animationInfo.count = 0.0f;
+		m_nowSit = NowCharaSit::Idle;
 	}
 	// UV(切り取るコマ)を設定
 	m_polygon.SetUVRect(animeCnt);
-
+	if (m_nowSit != m_oldSit)
+	{
+		ChangeAnimation();
+	}
+	m_oldSit = m_nowSit;
 	BaseChara::Update();
 }
 
@@ -36,7 +46,6 @@ void CrystalMauler::Init()
 	m_polygon.SetUVRect(0);
 	m_polygon.SetScale(3.0);
 	m_nowSit = NowCharaSit::Idle;
-	m_pos = { 0,0,0 };
 	ChangeAnimation();
 
 }

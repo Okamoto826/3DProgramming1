@@ -13,6 +13,14 @@ void GameScene::Event()
 	{
 		cameraPos.x -= 0.1;
 	}
+	if (GetAsyncKeyState(VK_UP) & 0x8000)
+	{
+		cameraPos.z += 0.1;
+	}
+	if (GetAsyncKeyState(VK_DOWN) & 0x8000)
+	{
+		cameraPos.z -= 0.1;
+	}
 	if (GetAsyncKeyState(VK_RIGHT) & 0x8000)
 	{
 		cameraPos.x += 0.1;
@@ -38,9 +46,12 @@ void GameScene::Event()
 
 void GameScene::Init()
 {
+
+	KdAudioManager::Instance().Play("Asset/Sound/base.wav", true)->SetVolume(0.1);
+	
 	// カメラ　生成＆視野角設定
 	m_camera = std::make_unique<KdCamera>();	// 1 メモリ確保
-	cameraPos = { 0.f,0.f,-5.0f };
+	cameraPos = { -20.f,0.f,-7.0f };
 
 	//②フォグ（霧）												距離　　高さ
 	KdShaderManager::Instance().WorkAmbientController().SetFogEnable(false, false);

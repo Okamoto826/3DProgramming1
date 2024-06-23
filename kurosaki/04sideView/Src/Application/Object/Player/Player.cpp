@@ -136,7 +136,7 @@ void Player::PostUpdate()
 	// 球の半径を設定
 	sphere.m_sphere.Radius = 0.3f;
 	// 当たり判定したいタイプを設定
-	sphere.m_type = KdCollider::TypeGround;
+	sphere.m_type = KdCollider::TypeGround|KdCollider::TypeDamage;
 
 	// デバッグ用
 	m_pDebugWire->AddDebugSphere(sphere.m_sphere.Center, sphere.m_sphere.Radius);
@@ -147,7 +147,15 @@ void Player::PostUpdate()
 	// 当たり判定
 	for (auto& obj : SceneManager::Instance().GetObjList())
 	{
-		obj->Intersects(sphere, &retSphereList);
+		if (obj->Intersects(sphere, &retSphereList))
+		{
+			// 当たったのが敵かどうか
+			if (obj->GetObjectType() == KdGameObject::ObjectType::Enemy)
+			{
+				// 敵確定
+				obj->OnHit();
+			}
+		}
 	}
 
 	// 球に当たったオブジェクトを検出

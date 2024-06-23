@@ -5,6 +5,17 @@ class KdGameObject : public std::enable_shared_from_this<KdGameObject>
 {
 public:
 
+	// オブジェクトタイプの種類
+	enum class ObjectType
+	{
+		None,
+		Player,
+		Enemy,
+		Item,
+		Boss,
+		Max,
+	};
+
 	// どのような描画を行うのかを設定するTypeID：Bitフラグで複数指定可能
 	enum
 	{
@@ -66,6 +77,14 @@ public:
 	bool Intersects(const KdCollider::BoxInfo& targetBox, std::list<KdCollider::CollisionResult>* pResults);
 	bool Intersects(const KdCollider::RayInfo& targetShape, std::list<KdCollider::CollisionResult>* pResults);
 
+	// オブジェクトタイプを取得
+	ObjectType GetObjectType()const
+	{
+		return m_objectType;
+	}
+
+	virtual void OnHit() {};
+
 protected:
 
 	void Release() {}
@@ -87,4 +106,7 @@ protected:
 
 	// デバッグ情報クラス
 	std::unique_ptr<KdDebugWireFrame> m_pDebugWire = nullptr;
+
+	// オブジェクトタイプを格納する変数
+	ObjectType m_objectType = ObjectType::None;
 };

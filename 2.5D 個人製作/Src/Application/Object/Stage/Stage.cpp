@@ -3,13 +3,13 @@
 void Stage::Init()
 {
 	m_model = std::make_shared<KdModelData>();
-	m_model->Load("Asset/Models/SideViewMap/SideViewMap.gltf");
+	m_model->Load("Asset/Models/SideViewMap/Stage.gltf");
 
 
 	Math::Matrix transMat;
-	transMat = Math::Matrix::CreateTranslation(-10, -3, 0);
+	transMat = Math::Matrix::CreateTranslation(0, -3.5, 0);
 	Math::Matrix scaleMat;
-	scaleMat = Math::Matrix::CreateScale(5.0, 1, 1);
+	scaleMat = Math::Matrix::CreateScale(50.0, 1,0.7 );
 
 	// 行列の合成は基本的にSRT
 	m_mWorld = scaleMat * transMat;

@@ -14,20 +14,36 @@ void CharaManager::Update()
 {
 	if (GetAsyncKeyState('L') & 0x8000)
 	{
-		std::shared_ptr<LeafRanger> leafRanger;
-		leafRanger = std::make_shared<LeafRanger>();
-		SceneManager::Instance().AddObject(leafRanger);
+		if(keyFlg==false)
+		{
+			std::shared_ptr<LeafRanger> leafRanger;
+			leafRanger = std::make_shared<LeafRanger>();
+			SceneManager::Instance().AddObject(leafRanger);
+		}
+		keyFlg = true;
 	}
-	if (GetAsyncKeyState('K') & 0x8000)
+	else if (GetAsyncKeyState('K') & 0x8000)
 	{
-		std::shared_ptr<CrystalMauler> crystalMauler;
-		crystalMauler = std::make_shared<CrystalMauler>();
-		SceneManager::Instance().AddObject(crystalMauler);
+		if (keyFlg == false)
+		{
+			std::shared_ptr<CrystalMauler> crystalMauler;
+			crystalMauler = std::make_shared<CrystalMauler>();
+			SceneManager::Instance().AddObject(crystalMauler);
+		}
+		keyFlg = true;
 	}
-	if (GetAsyncKeyState('J') & 0x8000)
+	else if (GetAsyncKeyState('J') & 0x8000)
 	{
-		std::shared_ptr<GroundMonk> groundMonk;
-		groundMonk = std::make_shared<GroundMonk>();
-		SceneManager::Instance().AddObject(groundMonk);
+		if (keyFlg == false)
+		{
+			std::shared_ptr<GroundMonk> groundMonk;
+			groundMonk = std::make_shared<GroundMonk>();
+			SceneManager::Instance().AddObject(groundMonk);
+		}
+		keyFlg = true;
+	}
+	else
+	{
+		keyFlg = false;
 	}
 }

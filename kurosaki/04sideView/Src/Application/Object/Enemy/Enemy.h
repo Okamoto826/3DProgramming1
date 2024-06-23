@@ -14,6 +14,8 @@ public:
 	void Update()override;
 	void PostUpdate() override;
 
+	void OnHit()override;
+
 private:
 
 	KdSquarePolygon m_polygon;

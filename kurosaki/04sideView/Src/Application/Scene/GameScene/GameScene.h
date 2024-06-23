@@ -3,6 +3,7 @@
 #include"../BaseScene/BaseScene.h"
 class Player;
 
+
 class GameScene : public BaseScene
 {
 public :
@@ -16,4 +17,5 @@ private:
 	void Init() override;
 
 	std::weak_ptr<Player> m_player;
+	
 };

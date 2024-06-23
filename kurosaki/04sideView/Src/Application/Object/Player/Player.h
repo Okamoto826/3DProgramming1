@@ -1,5 +1,6 @@
 ﻿#pragma once
 
+
 class Player :public KdGameObject
 {
 public:

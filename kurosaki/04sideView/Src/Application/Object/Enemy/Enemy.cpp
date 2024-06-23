@@ -3,6 +3,8 @@
 #include"../../Scene/SceneManager.h"
 void Enemy::Init()
 {
+	m_objectType = KdGameObject::ObjectType::Enemy;
+
 	m_polygon.SetMaterial("Asset/Textures/char.png");
 
 	// 画像分割
@@ -16,6 +18,11 @@ void Enemy::Init()
 	m_dir = 1;
 
 	m_pDebugWire = std::make_unique<KdDebugWireFrame>();
+
+	// 当たり判定用
+	m_pCollider = std::make_unique<KdCollider>();
+	m_pCollider->RegisterCollisionShape
+		("EnemyCollision", { 0,0.5f,0 }, 0.2, KdCollider::TypeDamage);
 }
 
 void Enemy::GenerateDepthMapFromLight()
@@ -170,4 +177,9 @@ void Enemy::PostUpdate()
 		m_pos += hitDir * maxOverLap;
 	}
 
+}
+
+void Enemy::OnHit()
+{
+	m_isExpired = true;
 }

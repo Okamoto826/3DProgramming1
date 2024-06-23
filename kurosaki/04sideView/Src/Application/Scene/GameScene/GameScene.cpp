@@ -106,7 +106,7 @@ void GameScene::Init()
 		enemy->SetPos({-25.f + (1.f * i), 0, 0});
 		m_objList.push_back(enemy);
 	}
-	
+
 
 	std::shared_ptr<Back> back;
 	back = std::make_shared<Back>();
