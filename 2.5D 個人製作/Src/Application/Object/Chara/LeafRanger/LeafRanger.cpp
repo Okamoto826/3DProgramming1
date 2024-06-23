@@ -58,9 +58,9 @@ void LeafRanger::Update()
 		// 球判定用の変数を設定
 		KdCollider::SphereInfo sphere;
 		// 球の中心位置を設定(座標)
-		sphere.m_sphere.Center = m_pos + Math::Vector3(2.0, 0.5f, 0);
+		sphere.m_sphere.Center = m_pos + Math::Vector3(1.5, 0.5f, 0);
 		// 球の半径を設定
-		sphere.m_sphere.Radius = 2.5f;
+		sphere.m_sphere.Radius = 3.f;
 		// 当たり判定したいタイプを設定
 		sphere.m_type = KdCollider::TypeDamage;
 
@@ -79,8 +79,6 @@ void LeafRanger::Update()
 					m_nowSit= NowCharaSit::Idle;
 					Atack();
 				}
-				
-
 			}
 			
 		}

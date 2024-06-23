@@ -167,6 +167,7 @@
     <ClInclude Include="Src\Application\Object\Chara\LeafRanger\Beam.h" />
     <ClInclude Include="Src\Application\Object\Chara\LeafRanger\LeafRanger.h" />
     <ClInclude Include="Src\Application\Object\Chara\LeafRanger\Arrow.h" />
+    <ClInclude Include="Src\Application\Object\Enemy\Boss\Boss.h" />
     <ClInclude Include="Src\Application\Object\Enemy\EnemyBase.h" />
     <ClInclude Include="Src\Application\Object\Enemy\EnemyManager.h" />
     <ClInclude Include="Src\Application\Object\Enemy\Goblin\Goblin.h" />
@@ -232,6 +233,7 @@
     <ClCompile Include="Src\Application\Object\Chara\LeafRanger\Beam.cpp" />
     <ClCompile Include="Src\Application\Object\Chara\LeafRanger\LeafRanger.cpp" />
     <ClCompile Include="Src\Application\Object\Chara\LeafRanger\Arrow.cpp" />
+    <ClCompile Include="Src\Application\Object\Enemy\Boss\Boss.cpp" />
     <ClCompile Include="Src\Application\Object\Enemy\EnemyBase.cpp" />
     <ClCompile Include="Src\Application\Object\Enemy\EnemyManager.cpp" />
     <ClCompile Include="Src\Application\Object\Enemy\Goblin\Goblin.cpp" />

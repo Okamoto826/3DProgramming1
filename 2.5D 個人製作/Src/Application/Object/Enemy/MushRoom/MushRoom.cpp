@@ -117,7 +117,10 @@ void MushRoom::Update()
 	
 	
 	EnemyBase::Update();
-	
+	if (GetAsyncKeyState('Q') & 0x8000)
+	{
+		OnHit(500.f);
+	}
 }
 
 void MushRoom::PostUpdate()

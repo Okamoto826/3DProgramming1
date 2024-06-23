@@ -11,6 +11,8 @@ void EnemyBase::Update()
 	Math::Matrix transMat;
 	transMat = Math::Matrix::CreateTranslation(m_pos);
 	m_mWorld = transMat;
+
+	
 }
 
 void EnemyBase::PostUpdate()

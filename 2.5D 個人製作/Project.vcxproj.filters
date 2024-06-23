@@ -100,6 +100,9 @@
     <Filter Include="Src\Application\Object\Enemy\Goblin">
       <UniqueIdentifier>{683364d9-b4dd-47d7-913f-99ec240c893d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Src\Application\Object\Enemy\Boss">
+      <UniqueIdentifier>{7694259a-339b-4bdd-9dc7-c6d1c0326b3f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Pch.h">
@@ -312,6 +315,9 @@
     <ClInclude Include="Src\Application\Object\Enemy\Goblin\Goblin.h">
       <Filter>Src\Application\Object\Enemy\Goblin</Filter>
     </ClInclude>
+    <ClInclude Include="Src\Application\Object\Enemy\Boss\Boss.h">
+      <Filter>Src\Application\Object\Enemy\Boss</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Pch.cpp">
@@ -496,6 +502,9 @@
     </ClCompile>
     <ClCompile Include="Src\Application\Object\Enemy\Goblin\Goblin.cpp">
       <Filter>Src\Application\Object\Enemy\Goblin</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Application\Object\Enemy\Boss\Boss.cpp">
+      <Filter>Src\Application\Object\Enemy\Boss</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

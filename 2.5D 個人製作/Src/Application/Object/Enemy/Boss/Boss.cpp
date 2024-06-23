@@ -1,7 +1,7 @@
-﻿#include "Goblin.h"
+﻿#include "Boss.h"
 #include"../../../Scene/SceneManager.h"
 
-void Goblin::Update()
+void Boss::Update()
 {
 	// 召喚中はリターン
 	if (d != 0)return;
@@ -27,7 +27,7 @@ void Goblin::Update()
 	m_polygon.SetUVRect(animeCnt);
 
 	//　攻撃
-	if (animeCnt == 6 && m_animationInfo.oldCount != 6)
+	if (animeCnt == 33 && m_animationInfo.oldCount != 33)
 	{
 
 
@@ -123,7 +123,7 @@ void Goblin::Update()
 	}
 }
 
-void Goblin::PostUpdate()
+void Boss::PostUpdate()
 {
 	EnemyBase::PostUpdate();
 	Math::Matrix rotMat = Math::Matrix::CreateRotationY(DirectX::XMConvertToRadians(180));
@@ -132,20 +132,20 @@ void Goblin::PostUpdate()
 }
 
 
-void Goblin::Init()
+void Boss::Init()
 {
 	EnemyBase::Init();
 	// 板ポリにテクスチャ(マテリアル)をロード
-	m_polygon.SetMaterial("Asset/Textures/Enemy/Goblin.png");
+	m_polygon.SetMaterial("Asset/Textures/Enemy/Boss1.png");
 
 	//　板ポリの基準点 (真ん中下段を指定)
 	m_polygon.SetPivot(KdSquarePolygon::PivotType::Center_Bottom);
 
-	m_polygon.SetSplit(8, 4);
+	m_polygon.SetSplit(12, 6);
 	m_polygon.SetUVRect(0);
 	m_polygon.SetScale(3.0);
 	m_nowSit = NowCharaSit::Idle;
-	m_hp = 50;
+	m_hp = 500;
 
 	ChangeAnimation();
 	// 当たり判定用
@@ -154,22 +154,22 @@ void Goblin::Init()
 	("EnemyCollision", { 0,0.5f,0 }, 0.2, KdCollider::TypeDamage);
 }
 
-void Goblin::ChangeAnimation()
+void Boss::ChangeAnimation()
 {
 	if (m_nowSit & NowCharaSit::Idle)
 	{
-		m_animationInfo.start = 16;		// 開始コマ
-		m_animationInfo.end = 19;		// 終了コマ	
+		m_animationInfo.start = 0;		// 開始コマ
+		m_animationInfo.end = 8;		// 終了コマ	
 	}
 	if (m_nowSit & NowCharaSit::Move)
 	{
-		m_animationInfo.start = 8;		// 開始コマ
-		m_animationInfo.end = 15;		// 終了コマ
+		m_animationInfo.start = 12;		// 開始コマ
+		m_animationInfo.end = 17;		// 終了コマ
 	}
 	if (m_nowSit & NowCharaSit::Skill)
 	{
-		m_animationInfo.start = 0;		// 開始コマ
-		m_animationInfo.end = 7;		// 終了コマ
+		m_animationInfo.start = 24;		// 開始コマ
+		m_animationInfo.end = 35;		// 終了コマ
 	}
 	if (m_nowSit & NowCharaSit::Skill2)
 	{
@@ -178,20 +178,20 @@ void Goblin::ChangeAnimation()
 	}
 	if (m_nowSit & NowCharaSit::Hit)
 	{
-		m_animationInfo.start = 20;		// 開始コマ
-		m_animationInfo.end = 23;		// 終了コマ
+		m_animationInfo.start = 36;		// 開始コマ
+		m_animationInfo.end = 40;		// 終了コマ
 	}
 	if (m_nowSit & NowCharaSit::Down)
 	{
-		m_animationInfo.start = 24;		// 開始コマ
-		m_animationInfo.end = 27;		// 終了コマ
+		m_animationInfo.start = 48;		// 開始コマ
+		m_animationInfo.end = 70;		// 終了コマ
 	}
 
 	m_animationInfo.count = 0.0f;	//	現在のコマ数カウント
 	m_animationInfo.speed = 0.2f;	// アニメーションの速度
 }
 
-void Goblin::Atack()
+void Boss::Atack()
 {
 
 	if (m_atkCoolTime >= 180)
@@ -201,11 +201,11 @@ void Goblin::Atack()
 	}
 }
 
-void Goblin::OnHit(float _dmg)
+void Boss::OnHit(float _dmg)
 {
 
 
-	if(m_nowSit & NowCharaSit::Idle||m_nowSit&NowCharaSit::Move)
+	if (m_nowSit & NowCharaSit::Idle || m_nowSit & NowCharaSit::Move)
 	{
 		m_nowSit = NowCharaSit::Hit;
 	}
@@ -214,5 +214,5 @@ void Goblin::OnHit(float _dmg)
 	{
 		m_nowSit = NowCharaSit::Down;
 	}
-	
+
 }
