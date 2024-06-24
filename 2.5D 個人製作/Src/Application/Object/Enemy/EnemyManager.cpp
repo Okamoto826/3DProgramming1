@@ -7,7 +7,17 @@
 
 void EnemyManager::Init()
 {
+	m_polygon.SetMaterial("Asset/Textures/Bles.png");
+	m_polygon.SetSplit(4, 1);
+	m_polygon.SetPivot(KdSquarePolygon::PivotType::Right_Middle);
+	m_polygon.SetUVRect(0);
+	m_pos = { 0,-2.5,0 };
+	m_spl = 0;
+}
 
+void EnemyManager::DrawLit()
+{
+	KdShaderManager::Instance().m_StandardShader.DrawPolygon(m_polygon, m_mWorld);
 }
 
 void EnemyManager::Update()
@@ -22,9 +32,9 @@ void EnemyManager::Update()
 			keyFlg = true;
 		}
 	}
-	else if (GetAsyncKeyState('N') & 0x8000)
+	else if (GetAsyncKeyState('Q') & 0x8000)
 	{
-		
+		m_isExpired = true;
 		keyFlg = true;
 	}
 	else if (GetAsyncKeyState('B') & 0x8000)
@@ -35,6 +45,7 @@ void EnemyManager::Update()
 			boss = std::make_shared<Boss>();
 			SceneManager::Instance().AddObject(boss);
 			keyFlg = true;
+			KdAudioManager::Instance().Play("Asset/Sound/boss.wav", false)->SetVolume(0.3);
 		}
 		keyFlg = true;
 	}
@@ -59,4 +70,16 @@ void EnemyManager::Update()
 		SceneManager::Instance().AddObject(goblin);
 		m_goblin = 0;
 	}
+
+
+	m_spl += 0.1;
+	if (m_spl >= 4)m_spl = 0;
+	m_polygon.SetUVRect(m_spl);
+
+
+	Math::Matrix transMat;
+	transMat = Math::Matrix::CreateTranslation(m_pos);
+	Math::Matrix radMat;
+	radMat = Math::Matrix::CreateRotationZ(DirectX::XMConvertToRadians(270));
+	m_mWorld = radMat*transMat;
 }

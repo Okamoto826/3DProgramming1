@@ -36,7 +36,7 @@ void Boss::Update()
 		// 球の中心位置を設定(座標)
 		sphere.m_sphere.Center = m_pos + Math::Vector3(-0.7, 0.7, 0);
 		// 球の半径を設定
-		sphere.m_sphere.Radius = 0.3f;
+		sphere.m_sphere.Radius = 0.4f;
 		// 当たり判定したいタイプを設定
 		sphere.m_type = KdCollider::TypeGround | KdCollider::TypeDamage;
 
@@ -203,16 +203,9 @@ void Boss::Atack()
 
 void Boss::OnHit(float _dmg)
 {
-
-
-	if (m_nowSit & NowCharaSit::Idle || m_nowSit & NowCharaSit::Move)
-	{
-		m_nowSit = NowCharaSit::Hit;
-	}
 	m_hp -= _dmg;
 	if (m_hp <= 0)
 	{
 		m_nowSit = NowCharaSit::Down;
 	}
-
 }

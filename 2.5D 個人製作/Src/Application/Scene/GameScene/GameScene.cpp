@@ -34,7 +34,7 @@ void GameScene::Event()
 	// カメラに行列をセット
 	// この時点では画面には反映されない
 	m_camera->SetCameraMatrix(mat);
-	if (GetAsyncKeyState('T') & 0x8000)
+	if (GetAsyncKeyState('P') & 0x8000)
 	{
 		SceneManager::Instance().SetNextScene
 		(
@@ -47,7 +47,7 @@ void GameScene::Event()
 
 void GameScene::Init()
 {
-
+	KdAudioManager::Instance().StopAllSound();
 	KdAudioManager::Instance().Play("Asset/Sound/base.wav", true)->SetVolume(0.1);
 	
 	// カメラ　生成＆視野角設定

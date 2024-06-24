@@ -29,6 +29,7 @@ void CrystalMauler::Update()
 	// 攻撃
 	if (animeCnt == 19 && m_animationInfo.oldCount != 19)
 	{
+		KdAudioManager::Instance().Play("Asset/Sound/atack.wav", false)->SetVolume(0.3);
 		// 球判定用の変数を設定
 		KdCollider::SphereInfo sphere;
 		// 球の中心位置を設定(座標)

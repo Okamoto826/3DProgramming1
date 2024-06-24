@@ -34,6 +34,7 @@ void LeafRanger::Update()
 		arrow = std::make_shared<Arrow>();
 		arrow->SetPos(m_pos + Math::Vector3(0.35, 0.8, 0));
 		SceneManager::Instance().AddObject(arrow);
+		KdAudioManager::Instance().Play("Asset/Sound/arrow.wav", false)->SetVolume(0.3);
 	}
 
 	//if (GetAsyncKeyState(VK_SPACE))OnHit(50.f);

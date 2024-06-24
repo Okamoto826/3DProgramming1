@@ -31,6 +31,7 @@ void TitleScene::Event()
 	{
 		cameraPos.x += 0.1;
 	}
+	cameraPos.x += 0.05;
 	Math::Matrix transmat = Math::Matrix::CreateTranslation(cameraPos);
 
 	// 行列を合成
@@ -53,6 +54,9 @@ void TitleScene::Event()
 
 void TitleScene::Init()
 {
+
+	KdAudioManager::Instance().StopAllSound();
+	KdAudioManager::Instance().Play("Asset/Sound/title.wav", true)->SetVolume(0.2);
 	// カメラ　生成＆視野角設定
 	m_camera = std::make_unique<KdCamera>();	// 1 メモリ確保
 	cameraPos = { -20.f,0.f,-7.0f };
