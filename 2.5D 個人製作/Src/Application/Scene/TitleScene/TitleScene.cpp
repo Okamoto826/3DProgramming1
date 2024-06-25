@@ -32,6 +32,10 @@ void TitleScene::Event()
 		cameraPos.x += 0.1;
 	}
 	cameraPos.x += 0.05;
+	if (cameraPos.x > 20)
+	{
+		cameraPos.x = -20.f;
+	}
 	Math::Matrix transmat = Math::Matrix::CreateTranslation(cameraPos);
 
 	// 行列を合成

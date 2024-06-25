@@ -84,7 +84,7 @@ void LeafRanger::Update()
 			
 		}
 	}
-	
+	if (cFlg == true)m_nowSit = NowCharaSit::Idle;
 
 	if (m_nowSit & NowCharaSit::Move)
 	{
@@ -97,6 +97,10 @@ void LeafRanger::Update()
 	if (GetAsyncKeyState('W') & 0x8000)
 	{
 		Atack();
+	}
+	if (GetAsyncKeyState('Q') & 0x8000)
+	{
+		cFlg=true;
 	}
 }
 

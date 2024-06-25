@@ -62,7 +62,7 @@ void Arrow::PostUpdate()
 			if (obj->GetObjectType() == KdGameObject::ObjectType::Enemy)
 			{
 				// 敵確定
-				obj->OnHit(100.f);
+				obj->OnHit(50.f);
 				OnHit();
 			}
 		}

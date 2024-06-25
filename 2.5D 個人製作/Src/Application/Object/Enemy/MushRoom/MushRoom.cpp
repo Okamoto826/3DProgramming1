@@ -145,7 +145,7 @@ void MushRoom::Init()
 	m_polygon.SetUVRect(0);
 	m_polygon.SetScale(3.0);
 	m_nowSit = NowCharaSit::Idle;
-	m_hp = 50;
+	m_hp = 60;
 
 	ChangeAnimation();
 	// 当たり判定用

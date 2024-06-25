@@ -62,4 +62,5 @@ protected:
 	float d;
 	float m_gravity;
 	float m_speed;
+	bool cFlg = false;
 };

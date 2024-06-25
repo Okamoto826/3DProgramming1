@@ -29,6 +29,7 @@ void GroundMonk::Update()
 	// 攻撃
 	if (animeCnt == 18 && m_animationInfo.oldCount != 18)
 	{
+		KdAudioManager::Instance().Play("Asset/Sound/atack.wav", false)->SetVolume(0.3);
 		// 球判定用の変数を設定
 		KdCollider::SphereInfo sphere;
 		// 球の中心位置を設定(座標)
@@ -108,7 +109,7 @@ void GroundMonk::Update()
 
 		}
 	}
-
+	if (cFlg == true)m_nowSit = NowCharaSit::Idle;
 
 	if (m_nowSit & NowCharaSit::Move)
 	{
@@ -121,6 +122,10 @@ void GroundMonk::Update()
 	if (GetAsyncKeyState('W') & 0x8000)
 	{
 		Atack();
+	}
+	if (GetAsyncKeyState('Q') & 0x8000)
+	{
+		cFlg = true;
 	}
 }
 
