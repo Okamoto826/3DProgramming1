@@ -1,13 +1,14 @@
 ﻿#include "Character.h"
-#include"../Camera/CameraBase.h"
+
 #include "../../main.h"
+#include "../Camera/CameraBase.h"
 
 void Character::Init()
 {
 	if (!m_spPoly)
 	{
 		m_spPoly = std::make_shared<KdSquarePolygon>();
-		m_spPoly->SetMaterial("Asset/Data/LessonData/Character/Hamu.png");
+		m_spPoly->SetMaterial("Asset/LessonData/Character/Hamu.png");
 		m_spPoly->SetPivot(KdSquarePolygon::PivotType::Center_Bottom);
 	}
 }
@@ -15,31 +16,30 @@ void Character::Init()
 void Character::Update()
 {
 	// キャラクターの移動速度(真似しちゃダメですよ)
-	float moveSpd = 0.05f;
-	Math::Vector3 nowPos = m_mWorld.Translation();
+	float			_moveSpd = 0.05f;
+	Math::Vector3	_nowPos	= GetPos();
 
-	Math::Vector3 moveVec = Math::Vector3::Zero;
-	if (GetAsyncKeyState('D')) { moveVec.x =  1.0f; }
-	if (GetAsyncKeyState('A')) { moveVec.x = -1.0f; }
-	if (GetAsyncKeyState('W')) { moveVec.z =  1.0f; }
-	if (GetAsyncKeyState('S')) { moveVec.z = -1.0f; }
+	Math::Vector3 _moveVec = Math::Vector3::Zero;
+	if (GetAsyncKeyState('D')) { _moveVec.x =  1.0f; }
+	if (GetAsyncKeyState('A')) { _moveVec.x = -1.0f; }
+	if (GetAsyncKeyState('W')) { _moveVec.z =  1.0f; }
+	if (GetAsyncKeyState('S')) { _moveVec.z = -1.0f; }
 
-	std::shared_ptr<CameraBase> _spCamera = m_wpCamera.lock();
+	const std::shared_ptr<const CameraBase> _spCamera = m_wpCamera.lock();
 	if (_spCamera)
 	{
-		moveVec = moveVec.TransformNormal(moveVec, _spCamera->GetRotationYMatrix());
+		_moveVec = _moveVec.TransformNormal(_moveVec, _spCamera->GetRotationYMatrix());
 	}
+	_moveVec.Normalize();
+	_moveVec *= _moveSpd;
+	_nowPos += _moveVec;
 
-	moveVec.Normalize();
-	moveVec *= moveSpd;
-	nowPos += moveVec;
-	UpdateRotate(moveVec);
+	// キャラクターの回転行列を創る
+	UpdateRotate(_moveVec);
 
 	// キャラクターのワールド行列を創る処理
 	Math::Matrix _rotation = Math::Matrix::CreateRotationY(DirectX::XMConvertToRadians(m_worldRot.y));
-
-	// キャラクターのワールド行列を創る処理
-	m_mWorld = _rotation * Math::Matrix::CreateTranslation(nowPos);
+	m_mWorld = _rotation * Math::Matrix::CreateTranslation(_nowPos);
 }
 
 void Character::DrawLit()
@@ -52,14 +52,15 @@ void Character::DrawLit()
 void Character::UpdateRotate(const Math::Vector3& srcMoveVec)
 {
 	// 何も入力が無い場合は処理しない
-	if (srcMoveVec.Length()==0.f) { return; }
+	if (srcMoveVec.LengthSquared() == 0.0f) { return; }
 
 	// キャラの正面方向のベクトル
 	Math::Vector3 _nowDir = GetMatrix().Backward();
-	_nowDir.Normalize();
 
-	// キャラの移動方向のベクトル
+	// 移動方向のベクトル
 	Math::Vector3 _targetDir = srcMoveVec;
+
+	_nowDir.Normalize();
 	_targetDir.Normalize();
 
 	float _nowAng = atan2(_nowDir.x, _nowDir.z);
@@ -74,8 +75,11 @@ void Character::UpdateRotate(const Math::Vector3& srcMoveVec)
 	{
 		_betweenAng -= 360;
 	}
+	else if (_betweenAng < -180)
+	{
+		_betweenAng += 360;
+	}
 
-	float _rotateAng = std::clamp(_betweenAng, -8.f, 8.f);
-	m_worldRot.y += _rotateAng;
+	float rotateAng = std::clamp(_betweenAng, -8.0f, 8.0f);
+	m_worldRot.y += rotateAng;
 }
-
