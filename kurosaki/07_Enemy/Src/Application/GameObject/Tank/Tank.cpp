@@ -1,6 +1,7 @@
 ﻿#include "Tank.h"
 #include"../../main.h"
 #include"../Camera/TPSCamera/TPSCamera.h"
+#include"../../Scene/SceneManager.h"
 
 void Tank::Init()
 {
@@ -10,10 +11,14 @@ void Tank::Init()
 	m_pCollider = std::make_unique<KdCollider>();
 	m_pCollider->RegisterCollisionShape("Moto", m_model, KdCollider::TypeDamage);
 	
+	m_pDebugWire = std::make_unique<KdDebugWireFrame>();
+
 }
 
 void Tank::Update()
 {
+	bool moveFlg = false;
+
 	// カメラのY回転行列を取得
 	Math::Matrix camRotYMat;
 	if (m_camera.expired() == false)
@@ -22,7 +27,7 @@ void Tank::Update()
 	}
 
 	Math::Vector3 moveVec; // 向きたい方向
-	bool moveFlg = false; // 状態フラグ
+	
 
 	// WASD
 	if (GetAsyncKeyState('W') & 0x8000)
@@ -50,6 +55,7 @@ void Tank::Update()
 		moveFlg = true;
 	}
 
+	m_atkFlg = moveFlg;
 	if (moveFlg == true)
 	{
 		// 移動中
@@ -114,6 +120,30 @@ void Tank::Update()
 		Math::Matrix transMat = Math::Matrix::CreateTranslation(m_pos);
 
 		m_mWorld = rotMat * transMat;
+	}
+}
+
+void Tank::PostUpdate()
+{
+	if (!m_atkFlg)return;
+
+	// 当たり判定(スフィア)
+	KdCollider::SphereInfo atkSphere;
+	atkSphere.m_sphere.Center = m_pos;
+	atkSphere.m_sphere.Center.y += 0.5;
+	atkSphere.m_sphere.Radius = 2.0f;
+	atkSphere.m_type = KdCollider::TypeDamage;
+
+	m_pDebugWire->AddDebugSphere(atkSphere.m_sphere.Center, atkSphere.m_sphere.Radius);
+
+	// 全オブジェクトとの当たり判定
+	for (auto& obj : SceneManager::Instance().GetObjList())
+	{
+		if (obj->Intersects(atkSphere, nullptr))
+		{
+			// 当たった
+			obj->OnHit();
+		}
 	}
 }
 

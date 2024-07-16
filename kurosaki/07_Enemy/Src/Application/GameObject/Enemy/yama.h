@@ -21,6 +21,8 @@ public:
 		}
 	};
 
+	void OnHit()override;
+
 private:
 	std::shared_ptr<KdModelData> m_model = nullptr;
 	std::weak_ptr<Tank> m_target;

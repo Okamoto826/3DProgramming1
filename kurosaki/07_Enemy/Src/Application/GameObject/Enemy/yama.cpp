@@ -84,3 +84,8 @@ void Yama::UpdateRotate(Math::Vector3& srcMoveVec)
 	float _rotateAng = std::clamp(_betweenAng, -8.f, 8.f);
 	m_worldRot.y += _rotateAng;
 }
+
+void Yama::OnHit()
+{
+	m_isExpired = true;
+}

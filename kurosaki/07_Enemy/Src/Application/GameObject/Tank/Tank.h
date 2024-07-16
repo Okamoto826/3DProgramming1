@@ -9,6 +9,7 @@ public:
 
 	void Init()override;
 	void Update()override;
+	void PostUpdate()override;
 	void DrawLit()override;
 	void SetCamera(std::shared_ptr<TPSCamera>_camera)
 	{
@@ -20,4 +21,5 @@ private:
 	std::weak_ptr<TPSCamera> m_camera;
 	float m_angle = 0;
 	Math::Vector3 m_pos;
+	bool m_atkFlg = false;
 };
