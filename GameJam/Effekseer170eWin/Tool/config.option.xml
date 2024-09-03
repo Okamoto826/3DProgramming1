@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<EffekseerProject>
+  <Option>
+    <LanguageSelector>ja</LanguageSelector>
+  </Option>
+  <Environment>
+    <Background>
+      <BackgroundColor>
+        <R>114</R>
+        <G>114</G>
+        <B>114</B>
+      </BackgroundColor>
+    </Background>
+  </Environment>
+</EffekseerProject>
